@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ready? China! — Survive &amp; Thrive with K</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf6ef;
+  --bg2: #f2ece0;
+  --surface: rgba(0,0,0,0.04);
+  --surface2: rgba(0,0,0,0.07);
+  --border: rgba(0,0,0,0.09);
+  --accent: #c0392b;
+  --accent2: #e74c3c;
+  --gold: #9a7b2f;
+  --gold-light: #c9a84c;
+  --text: #1a1208;
+  --text-mid: #4a3c28;
+  --text-muted: #8a7a60;
+  --province-default: #d4c9b0;
+  --province-stroke: #b8a888;
+  --province-hover: #c9a84c;
+  --province-active: #c0392b;
+  --red-soft: rgba(192,57,43,0.1);
+  --red-border: rgba(192,57,43,0.25);
+  --gold-soft: rgba(154,123,47,0.12);
+  --gold-border: rgba(154,123,47,0.3);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(192,57,43,0.06),transparent 60%);pointer-events:none;z-index:0}
+
+/* HEADER */
+header{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;background:rgba(250,246,239,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.logo-area{display:flex;align-items:center;gap:12px}
+.logo-travelers{display:flex;align-items:flex-end;gap:1px;height:36px}
+.traveler{animation:bob 1.8s ease-in-out infinite alternate}
+.traveler:nth-child(2){animation-delay:.3s}.traveler:nth-child(3){animation-delay:.6s}
+@keyframes bob{0%{transform:translateY(0)}100%{transform:translateY(-3px)}}
+.logo-text .logo-main{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--accent);letter-spacing:.5px;line-height:1}
+.logo-text .logo-sub{font-size:9px;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase;margin-top:2px}
+nav{display:flex;gap:6px;align-items:center}
+.nav-link{padding:8px 16px;border-radius:6px;font-size:13px;color:var(--text-mid);text-decoration:none;cursor:pointer;transition:all .2s;background:none;border:none;font-family:'DM Sans',sans-serif}
+.nav-link:hover{background:var(--surface2);color:var(--text)}
+.nav-cta{background:var(--accent)!important;color:white!important;letter-spacing:.5px;position:relative}
+.nav-cta:hover{background:var(--accent2)!important}
+.nav-cta .soon-tag{position:absolute;top:-8px;right:-4px;background:var(--gold-light);color:white;font-size:8px;padding:1px 5px;border-radius:6px;letter-spacing:1px}
+
+/* FLOATING MENU */
+#menu-btn{position:fixed;top:84px;left:20px;z-index:200;width:46px;height:46px;background:white;border:1px solid var(--border);border-radius:10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;box-shadow:0 2px 12px rgba(0,0,0,0.08);transition:all .2s}
+#menu-btn:hover{border-color:var(--accent);box-shadow:0 4px 20px rgba(192,57,43,0.15)}
+#menu-btn span{display:block;width:18px;height:2px;background:var(--text-mid);transition:transform .3s,opacity .3s;border-radius:1px}
+#menu-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+#menu-btn.open span:nth-child(2){opacity:0}
+#menu-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+#menu-dropdown{position:fixed;top:140px;left:20px;z-index:199;background:white;border:1px solid var(--border);border-radius:12px;width:240px;display:none;box-shadow:0 8px 40px rgba(0,0,0,0.12);overflow:hidden}
+#menu-dropdown.show{display:block;animation:slideDown .2s ease}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.menu-item{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .15s}
+.menu-item:last-child{border-bottom:none}
+.menu-item:hover{background:var(--surface)}
+.menu-icon{font-size:20px;width:28px;text-align:center}
+.menu-item-title{font-size:13px;color:var(--text);font-weight:500;margin-bottom:2px}
+.menu-item-sub{font-size:10px;color:var(--text-muted)}
+.mbadge{margin-left:auto;font-size:9px;padding:2px 7px;border-radius:8px;font-weight:700;letter-spacing:.8px}
+.mbadge-red{background:var(--red-soft);color:var(--accent);border:1px solid var(--red-border)}
+.mbadge-gray{background:var(--surface2);color:var(--text-muted);border:1px solid var(--border)}
+
+/* MAIN */
+main{padding-top:70px;position:relative;z-index:1}
+
+/* HERO SECTION */
+.hero{min-height:92vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px 60px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--red-soft);border:1px solid var(--red-border);padding:6px 16px;border-radius:20px;font-size:12px;color:var(--accent);letter-spacing:1px;margin-bottom:28px}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,68px);line-height:1.12;color:var(--text);margin-bottom:20px;max-width:760px}
+.hero-title em{color:var(--accent);font-style:italic}
+.hero-sub{font-size:15px;color:var(--text-muted);line-height:1.7;max-width:520px;margin:0 auto 36px}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+.btn-primary{background:var(--accent);color:white;padding:14px 28px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:all .2s;letter-spacing:.3px}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(192,57,43,0.3)}
+.btn-secondary{background:white;color:var(--text);padding:14px 28px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;border:1px solid var(--border);font-family:'DM Sans',sans-serif;transition:all .2s}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.hero-story{background:white;border:1px solid var(--border);border-radius:16px;padding:24px 28px;max-width:560px;text-align:left;box-shadow:0 2px 20px rgba(0,0,0,0.06)}
+.story-quote{font-family:'Playfair Display',serif;font-size:14px;font-style:italic;color:var(--text-mid);line-height:1.7;margin-bottom:16px}
+.story-examples{display:flex;flex-direction:column;gap:10px}
+.story-ex{display:flex;gap:10px;font-size:12px;color:var(--text-muted);line-height:1.5;padding:10px;background:var(--surface);border-radius:8px}
+.story-ex-icon{font-size:16px;flex-shrink:0}
+
+/* SECTION COMMON */
+.section{padding:60px 24px;max-width:960px;margin:0 auto}
+.section-eyebrow{font-size:11px;color:var(--gold);letter-spacing:4px;text-transform:uppercase;margin-bottom:12px}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,38px);color:var(--text);margin-bottom:10px}
+.section-sub{font-size:14px;color:var(--text-muted);line-height:1.6;margin-bottom:36px}
+.section-divider{border:none;border-top:1px solid var(--border);margin:0}
+
+/* GET READY — CHECKLIST */
+.checklist-steps{display:flex;flex-direction:column;gap:16px;margin-bottom:32px}
+.check-step{background:white;border:1px solid var(--border);border-radius:12px;padding:18px 22px;display:flex;align-items:flex-start;gap:16px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.check-step:hover{border-color:var(--accent);box-shadow:0 4px 20px rgba(192,57,43,0.08)}
+.check-step.done{background:rgba(39,174,96,0.04);border-color:rgba(39,174,96,0.3)}
+.check-step.done .step-check{background:#27ae60;border-color:#27ae60}
+.check-step.done .step-check::after{content:'✓';color:white;font-size:14px;font-weight:700}
+.step-check{width:32px;height:32px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;margin-top:2px}
+.step-check:hover{border-color:var(--accent)}
+.step-num-label{font-size:10px;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.step-title-main{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px}
+.step-desc-main{font-size:12px;color:var(--text-muted);line-height:1.5}
+.step-action{margin-left:auto;flex-shrink:0}
+.step-btn{background:var(--red-soft);border:1px solid var(--red-border);color:var(--accent);padding:7px 14px;border-radius:6px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;white-space:nowrap}
+.step-btn:hover{background:var(--accent);color:white}
+/* Progress bar */
+.progress-area{background:white;border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:32px}
+.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.progress-label{font-size:13px;color:var(--text);font-weight:500}
+.progress-pct{font-size:22px;font-weight:700;color:var(--accent);font-family:'Playfair Display',serif}
+.progress-bar-bg{height:10px;background:var(--surface2);border-radius:10px;overflow:hidden}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--gold-light));border-radius:10px;transition:width .6s ease;width:0%}
+.progress-status{font-size:11px;color:var(--text-muted);margin-top:8px}
+
+/* CITIES — CARD GRID */
+.city-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.city-card{background:white;border:1px solid var(--border);border-radius:12px;padding:20px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.city-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 30px rgba(192,57,43,0.1)}
+.city-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+.city-emoji-big{font-size:32px}
+.city-difficulty{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.diff-label{font-size:9px;color:var(--text-muted);letter-spacing:1px;text-transform:uppercase}
+.diff-stars{color:var(--gold-light);font-size:13px;letter-spacing:1px}
+.city-name-zh{font-family:'Noto Serif SC',serif;font-size:22px;color:var(--text);margin-bottom:2px}
+.city-name-en{font-size:11px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.city-best-for{font-size:11px;color:var(--text-muted);margin-bottom:8px}
+.city-best-for strong{color:var(--text-mid)}
+.city-days{display:inline-flex;align-items:center;gap:5px;background:var(--gold-soft);border:1px solid var(--gold-border);padding:3px 10px;border-radius:10px;font-size:10px;color:var(--gold);margin-bottom:10px}
+.city-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
+.city-tag{font-size:9px;padding:2px 8px;background:var(--surface);color:var(--text-muted);border-radius:8px;border:1px solid var(--border)}
+.city-detail{display:none;border-top:1px solid var(--border);margin-top:12px;padding-top:12px}
+.city-detail.open{display:block;animation:fadeIn .2s ease}
+.city-must-see{font-size:11px;font-weight:600;color:var(--text-mid);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.attr-list{list-style:none}
+.attr-list li{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--text-muted);padding:5px 0;border-bottom:1px solid var(--border);line-height:1.4}
+.attr-list li:last-child{border-bottom:none}
+.attr-n{width:18px;height:18px;border-radius:50%;background:var(--red-soft);color:var(--accent);border:1px solid var(--red-border);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0}
+
+/* MAP SECTION */
+.map-section-wrap{padding:60px 24px;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.map-container{max-width:860px;margin:0 auto}
+#china-map-svg{width:100%;height:auto;display:block;margin-top:20px}
+#china-map-svg .province{fill:var(--province-default);stroke:var(--province-stroke);stroke-width:.8;cursor:pointer;transition:fill .3s,filter .3s}
+#china-map-svg .province:hover{fill:var(--province-hover);filter:drop-shadow(0 0 6px rgba(201,168,76,.5))}
+#china-map-svg .province.active{fill:var(--province-active);filter:drop-shadow(0 0 10px rgba(192,57,43,.6))}
+.prov-lbl{pointer-events:none;font-family:'Noto Serif SC',serif}
+.plzh{font-size:7px;fill:rgba(26,18,8,.5)}
+.plen{font-size:5px;fill:rgba(26,18,8,.3)}
+#prov-tip{position:fixed;display:none;background:white;border:1px solid var(--gold-light);border-radius:8px;padding:12px 16px;z-index:500;pointer-events:none;min-width:180px;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+#prov-tip .tzh{font-family:'Noto Serif SC',serif;font-size:18px;color:var(--accent);margin-bottom:2px}
+#prov-tip .ten{font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+#prov-tip .tdesc{font-size:11px;color:var(--text-muted);line-height:1.5}
+#map-active-strip{text-align:center;min-height:40px;padding:8px;display:flex;align-items:center;justify-content:center}
+.map-pill{display:inline-flex;align-items:center;gap:10px;background:var(--red-soft);border:1px solid var(--red-border);padding:8px 20px;border-radius:20px}
+.map-pill-zh{font-family:'Noto Serif SC',serif;font-size:17px;color:var(--accent)}
+.map-pill-en{font-size:11px;color:var(--gold);letter-spacing:2px;text-transform:uppercase}
+.map-pill-btn{font-size:10px;color:var(--text-muted);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+/* COMMUNITY */
+.community-coming{background:white;border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}
+.comm-icon{font-size:48px;margin-bottom:16px}
+.comm-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);margin-bottom:10px}
+.comm-sub{font-size:13px;color:var(--text-muted);line-height:1.7;max-width:440px;margin:0 auto 24px}
+.comm-notify{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.comm-input{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:10px 16px;border-radius:6px;font-size:12px;outline:none;width:220px;font-family:'DM Sans',sans-serif;transition:border-color .2s}
+.comm-input:focus{border-color:var(--gold)}
+.comm-btn{background:var(--accent);color:white;border:none;padding:10px 18px;border-radius:6px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;transition:opacity .2s}
+.comm-btn:hover{opacity:.85}
+.comm-success{font-size:12px;color:var(--gold);margin-top:10px;display:none}
+
+/* MODALS */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);z-index:300;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.show{display:flex;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal-box{background:white;border:1px solid var(--border);border-radius:16px;max-width:700px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 20px 80px rgba(0,0,0,.15);animation:modalUp .28s ease}
+@keyframes modalUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.modal-header{padding:22px 26px 18px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;position:sticky;top:0;background:white;z-index:10;border-radius:16px 16px 0 0}
+.modal-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--text);margin-bottom:3px}
+.modal-subtitle{font-size:11px;color:var(--text-muted)}
+.modal-close{background:none;border:1px solid var(--border);color:var(--text-muted);width:32px;height:32px;border-radius:6px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.modal-close:hover{border-color:var(--accent);color:var(--accent)}
+.modal-body{padding:22px 26px}
+
+/* VISA MODAL */
+.nationality-search{width:100%;padding:10px 16px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--text);outline:none;margin-bottom:12px;transition:border-color .2s}
+.nationality-search:focus{border-color:var(--gold)}
+.country-list{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;max-height:200px;overflow-y:auto}
+.country-btn{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:7px 12px;cursor:pointer;font-size:12px;color:var(--text-mid);transition:all .2s;display:flex;align-items:center;gap:6px}
+.country-btn:hover,.country-btn.selected{border-color:var(--gold);background:var(--gold-soft);color:var(--gold)}
+.visa-result{display:none;background:var(--surface);border-left:3px solid var(--gold-light);padding:16px;border-radius:0 8px 8px 0;font-size:12px;color:var(--text-muted);line-height:1.8;margin-top:12px}
+.visa-result.show{display:block;animation:fadeIn .2s}
+.visa-result strong{color:var(--text)}
+.visa-result a{color:var(--gold)}
+.visa-free-section{margin-top:20px}
+.vf-title{font-size:12px;color:var(--gold);letter-spacing:1px;font-weight:600;margin-bottom:10px}
+.vf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:6px}
+.vf-item{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--surface);border:1px solid var(--border);border-radius:6px;font-size:11px;color:var(--text-mid)}
+
+/* APP LIST */
+.app-list{display:flex;flex-direction:column;gap:10px}
+.app-item{display:flex;gap:14px;align-items:flex-start;padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:10px}
+.app-icon-box{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;background:white;border:1px solid var(--border)}
+.app-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
+.app-desc{font-size:11px;color:var(--text-muted);line-height:1.5}
+.app-tip{font-size:10px;color:var(--gold);margin-top:5px}
+
+/* INFO CARDS */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.info-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px}
+.info-card-title{font-size:12px;font-weight:600;color:var(--text-mid);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.info-list{list-style:none}
+.info-list li{font-size:11px;color:var(--text-muted);padding:4px 0;border-bottom:1px solid var(--border);display:flex;gap:6px;line-height:1.4}
+.info-list li:last-child{border-bottom:none}
+.info-list li::before{content:'·';color:var(--gold);flex-shrink:0}
+
+/* ABOUT (K's PROFILE) */
+.about-card{background:white;border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.about-top{background:linear-gradient(135deg,var(--accent) 0%,#8b1a1a 100%);padding:32px;display:flex;align-items:flex-start;gap:20px}
+.about-avatar{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;border:2px solid rgba(255,255,255,.4)}
+.about-intro .about-name{font-family:'Playfair Display',serif;font-size:22px;color:white;margin-bottom:4px}
+.about-intro .about-role{font-size:11px;color:rgba(255,255,255,.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.about-intro .about-flags{font-size:20px;letter-spacing:4px}
+.about-body{padding:28px}
+.about-story{font-size:13px;color:var(--text-mid);line-height:1.8;margin-bottom:20px}
+.about-examples{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.about-ex{display:flex;gap:12px;padding:14px;background:var(--surface);border-radius:8px;border:1px solid var(--border)}
+.about-ex-icon{font-size:20px;flex-shrink:0}
+.about-ex-text{font-size:12px;color:var(--text-muted);line-height:1.6}
+.about-contact{display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--red-soft);border:1px solid var(--red-border);border-radius:8px;font-size:12px;color:var(--text-mid)}
+.about-contact a{color:var(--accent);font-weight:500}
+.about-hometown{font-family:'Noto Serif SC',serif;font-size:13px;color:var(--accent);margin-top:12px}
+
+/* AI PLANNER TEASER */
+.planner-teaser{text-align:center;padding:10px 0}
+.planner-icon{font-size:48px;margin-bottom:16px}
+.planner-h{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);margin-bottom:10px}
+.planner-p{font-size:13px;color:var(--text-muted);line-height:1.7;max-width:420px;margin:0 auto 24px}
+.feature-list{display:flex;flex-direction:column;gap:8px;max-width:380px;margin:0 auto 24px;text-align:left}
+.feat-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--text-muted)}
+.feat-icon{font-size:16px}
+.notify-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.notify-input{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:10px 16px;border-radius:6px;font-size:12px;outline:none;width:210px;font-family:'DM Sans',sans-serif;transition:border-color .2s}
+.notify-input:focus{border-color:var(--gold)}
+.notify-btn{background:var(--accent);color:white;border:none;padding:10px 18px;border-radius:6px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif}
+.notify-btn:hover{background:var(--accent2)}
+.notify-ok{font-size:12px;color:var(--gold);margin-top:10px;display:none}
+
+/* NOTE */
+.modal-note{margin-top:16px;background:var(--red-soft);border-left:3px solid var(--accent);padding:12px 16px;border-radius:0 6px 6px 0;font-size:12px;color:var(--text-muted);line-height:1.6}
+.modal-note strong{color:var(--text)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:28px 32px;display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--text-muted)}
+.footer-brand{font-family:'Playfair Display',serif;font-size:18px;color:var(--accent);margin-bottom:4px}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(154,123,47,.3);border-radius:2px}
+
+@media(max-width:640px){
+  nav .nav-link:not(.nav-cta){display:none}
+  header{padding:12px 16px}
+  .hero{padding:30px 16px 50px}
+  .section{padding:40px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-area">
+    <div class="logo-travelers">
+      <div class="traveler">
+        <svg width="20" height="32" viewBox="0 0 20 32" fill="none">
+          <circle cx="10" cy="4.5" r="3.5" fill="#c0392b" opacity=".85"/>
+          <rect x="6" y="9" width="8" height="13" rx="2" fill="#c0392b" opacity=".85"/>
+          <rect x="12.5" y="10" width="5" height="7" rx="1.5" fill="#9a7b2f" opacity=".9"/>
+          <line x1="7.5" y1="22" x2="5.5" y2="31" stroke="#c0392b" stroke-width="2.5" stroke-linecap="round" opacity=".85"/>
+          <line x1="12.5" y1="22" x2="14.5" y2="31" stroke="#c0392b" stroke-width="2.5" stroke-linecap="round" opacity=".85"/>
+        </svg>
+      </div>
+      <div class="traveler">
+        <svg width="18" height="30" viewBox="0 0 18 30" fill="none">
+          <circle cx="9" cy="4" r="3" fill="#9a7b2f" opacity=".8"/>
+          <rect x="5.5" y="8" width="7" height="12" rx="2" fill="#9a7b2f" opacity=".8"/>
+          <rect x="11" y="9" width="4.5" height="6.5" rx="1.5" fill="#c0392b" opacity=".7"/>
+          <line x1="7" y1="20" x2="5.5" y2="29" stroke="#9a7b2f" stroke-width="2.2" stroke-linecap="round" opacity=".8"/>
+          <line x1="11" y1="20" x2="12.5" y2="29" stroke="#9a7b2f" stroke-width="2.2" stroke-linecap="round" opacity=".8"/>
+        </svg>
+      </div>
+      <div class="traveler">
+        <svg width="16" height="28" viewBox="0 0 16 28" fill="none">
+          <circle cx="8" cy="3.5" r="2.8" fill="#4a3c28" opacity=".6"/>
+          <rect x="5" y="7" width="6" height="11" rx="2" fill="#4a3c28" opacity=".6"/>
+          <rect x="9.5" y="8" width="4" height="6" rx="1.5" fill="#c0392b" opacity=".55"/>
+          <line x1="6.5" y1="18" x2="5" y2="27" stroke="#4a3c28" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+          <line x1="9.5" y1="18" x2="11" y2="27" stroke="#4a3c28" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+        </svg>
+      </div>
+    </div>
+    <div class="logo-text">
+      <div class="logo-main">Ready? China!</div>
+      <div class="logo-sub">Survive & Thrive with K</div>
+    </div>
+  </div>
+  <nav>
+    <button class="nav-link" onclick="scrollToSection('ready-section')">Get Ready with Me</button>
+    <button class="nav-link" onclick="scrollToSection('cities-section')">Cities</button>
+    <button class="nav-link" onclick="scrollToSection('community-section')">Community</button>
+    <button class="nav-link nav-cta" onclick="openModal('planning-modal')">
+      <span class="soon-tag">SOON</span>Start Planning
+    </button>
+  </nav>
+</header>
+
+<!-- FLOATING MENU -->
+<button id="menu-btn" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+<div id="menu-dropdown">
+  <div class="menu-item" onclick="scrollToSection('ready-section');closeMenu()">
+    <div class="menu-icon">✅</div>
+    <div><div class="menu-item-title">Get Ready with Me</div><div class="menu-item-sub">Step-by-step checklist</div></div>
+    <span class="mbadge mbadge-red">START</span>
+  </div>
+  <div class="menu-item" onclick="scrollToSection('cities-section');closeMenu()">
+    <div class="menu-icon">🗺️</div>
+    <div><div class="menu-item-title">Cities</div><div class="menu-item-sub">Where should I go?</div></div>
+  </div>
+  <div class="menu-item" onclick="scrollToSection('map-section');closeMenu()">
+    <div class="menu-icon">📍</div>
+    <div><div class="menu-item-title">Explore the Map</div><div class="menu-item-sub">All 31 provinces</div></div>
+  </div>
+  <div class="menu-item" onclick="scrollToSection('community-section');closeMenu()">
+    <div class="menu-icon">👥</div>
+    <div><div class="menu-item-title">Community</div><div class="menu-item-sub">Tips from real travelers</div></div>
+    <span class="mbadge mbadge-gray">SOON</span>
+  </div>
+  <div class="menu-item" onclick="openModal('about-modal');closeMenu()">
+    <div class="menu-icon">🙋‍♀️</div>
+    <div><div class="menu-item-title">About K</div><div class="menu-item-sub">Who built this & why</div></div>
+  </div>
+  <div class="menu-item" onclick="openModal('planning-modal');closeMenu()">
+    <div class="menu-icon">🤖</div>
+    <div><div class="menu-item-title">AI Trip Planner</div><div class="menu-item-sub">Auto itinerary</div></div>
+    <span class="mbadge mbadge-gray">SOON</span>
+  </div>
+</div>
+
+<!-- TOOLTIP -->
+<div id="prov-tip"><div class="tzh" id="tip-zh"></div><div class="ten" id="tip-en"></div><div class="tdesc" id="tip-desc"></div></div>
+
+<main>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-badge">🇨🇳 Made by a local, for curious friends</div>
+  <h1 class="hero-title">Your friend in China is waiting.<br>Let's get you there <em>ready</em>.</h1>
+  <p class="hero-sub">You've never been to China. You don't know where to start. Don't worry — I've got you, step by step, from passport check to your first hotpot.</p>
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="scrollToSection('ready-section')">Get Ready with Me →</button>
+    <button class="btn-secondary" onclick="scrollToSection('cities-section')">Where should I go?</button>
+  </div>
+  <div class="hero-story">
+    <div class="story-quote">"China sounds amazing — but where do I even start?" I've heard this from every single foreign friend before their first visit. So I built this."</div>
+    <div class="story-examples">
+      <div class="story-ex"><div class="story-ex-icon">📶</div><div>My Australian friend landed in Shanghai and spent 2 hours at the airport trying to get wifi — his phone had no signal and he couldn't contact the hotel.</div></div>
+      <div class="story-ex"><div class="story-ex-icon">💳</div><div>Another friend couldn't pay for dinner. He assumed credit cards worked everywhere — but China runs on WeChat Pay and Alipay face-scan payments.</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════ GET READY WITH ME ═══════════ -->
+<section class="section" id="ready-section">
+  <div class="section-eyebrow">Step by Step · 出发准备</div>
+  <h2 class="section-title">Get Ready with Me</h2>
+  <p class="section-sub">Tick each step as you complete it. Your China readiness score updates in real time.</p>
+
+  <div class="progress-area">
+    <div class="progress-header">
+      <div class="progress-label">🇨🇳 China Ready Score</div>
+      <div class="progress-pct" id="pct-label">0%</div>
+    </div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="prog-bar"></div></div>
+    <div class="progress-status" id="prog-status">Complete the steps below to track your readiness</div>
+  </div>
+
+  <div class="checklist-steps">
+
+    <div class="check-step" id="step-passport">
+      <div class="step-check" onclick="toggleStep('step-passport')"></div>
+      <div style="flex:1">
+        <div class="step-num-label">Step 1</div>
+        <div class="step-title-main">🛂 Check Your Passport</div>
+        <div class="step-desc-main">Is it still valid? China requires at least 6 months validity beyond your travel dates. No passport? Start the application now — it takes 4–6 weeks.</div>
+      </div>
+    </div>
+
+    <div class="check-step" id="step-visa">
+      <div class="step-check" onclick="toggleStep('step-visa')"></div>
+      <div style="flex:1">
+        <div class="step-num-label">Step 2</div>
+        <div class="step-title-main">📋 Sort Your Visa</div>
+        <div class="step-desc-main">Requirements depend on your nationality. Some countries are now visa-free for 15 days. Others need to apply. Click to find yours.</div>
+      </div>
+      <div class="step-action"><button class="step-btn" onclick="openModal('visa-modal')">Check my visa →</button></div>
+    </div>
+
+    <div class="check-step" id="step-flights">
+      <div class="step-check" onclick="toggleStep('step-flights')"></div>
+      <div style="flex:1">
+        <div class="step-num-label">Step 3</div>
+        <div class="step-title-main">✈️ Book Flights & Hotels</div>
+        <div class="step-desc-main">Once your visa is approved, book everything. Use Trip.com for China hotels (not all hotels accept foreigners). International chains are always safe.</div>
+      </div>
+    </div>
+
+    <div class="check-step" id="step-esim">
+      <div class="step-check" onclick="toggleStep('step-esim')"></div>
+      <div style="flex:1">
+        <div class="step-num-label">Step 4</div>
+        <div class="step-title-main">📶 Get a SIM or eSIM</div>
+        <div class="step-desc-main">Many hotels need a Chinese phone number to check in. Get an eSIM on Airalo before you fly, or buy a China Mobile SIM at the airport with your passport.</div>
+      </div>
+      <div class="step-action"><button class="step-btn" onclick="openModal('sim-modal')">SIM guide →</button></div>
+    </div>
+
+    <div class="check-step" id="step-payment">
+      <div class="step-check" onclick="toggleStep('step-payment')"></div>
+      <div style="flex:1">
+        <div class="step-num-label">Step 5</div>
+        <div class="step-title-main">💳 Set Up Payments</div>
+        <div class="step-desc-main">China is almost entirely cashless. Street food stalls, taxis, supermarkets — all QR code. Link your foreign card to Alipay before you land. This is the #1 thing to do.</div>
+      </div>
+      <div class="step-action"><button class="step-btn" onclick="openModal('payment-modal')">How to →</button></div>
+    </div>
+
+    <div class="check-step" id="step-network">
+      <div class="step-check" onclick="toggleStep('step-network')"></div>
+      <div style="flex:1">
+        <div class="step-num-label">Step 6</div>
+        <div class="step-title-main">🌐 Internet & Social Media</div>
+        <div class="step-desc-main">Google, Instagram, WhatsApp are blocked in China. Download a VPN before you fly — you can't download them once you're there. I'll tell you which ones actually work.</div>
+      </div>
+      <div class="step-action"><button class="step-btn" onclick="openModal('network-modal')">Learn more →</button></div>
+    </div>
+
+    <div class="check-step" id="step-apps">
+      <div class="step-check" onclick="toggleStep('step-apps')"></div>
+      <div style="flex:1">
+        <div class="step-num-label">Step 7</div>
+        <div class="step-title-main">📱 Download Your Apps</div>
+        <div class="step-desc-main">WeChat, Alipay, Didi, Amap, Dianping, Trip.com. These 6 apps will run your entire trip. Set them up now — some require verification that's easier outside China.</div>
+      </div>
+      <div class="step-action"><button class="step-btn" onclick="openModal('apps-modal')">App list →</button></div>
+    </div>
+
+    <div class="check-step" id="step-transport">
+      <div class="step-check" onclick="toggleStep('step-transport')"></div>
+      <div style="flex:1">
+        <div class="step-num-label">Step 8</div>
+        <div class="step-title-main">🚄 Understand Transport</div>
+        <div class="step-desc-main">China's high-speed rail is the best in the world. Learn how to book trains, use Didi (no language barrier), and navigate the metro system.</div>
+      </div>
+      <div class="step-action"><button class="step-btn" onclick="openModal('transport-modal')">Transport guide →</button></div>
+    </div>
+
+    <div class="check-step" id="step-customs">
+      <div class="step-check" onclick="toggleStep('step-customs')"></div>
+      <div style="flex:1">
+        <div class="step-num-label">Step 9</div>
+        <div class="step-title-main">🛃 Arrival & Immigration</div>
+        <div class="step-desc-main">What to expect at Chinese immigration, health declaration forms, baggage rules, and how to get from the airport to your hotel smoothly.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════ CITIES ═══════════ -->
+<section class="section" id="cities-section">
+  <div class="section-eyebrow">Where to Go · 城市推荐</div>
+  <h2 class="section-title">As a first-timer, where should I go?</h2>
+  <p class="section-sub">Don't just follow the crowd. Here's an honest guide — best for what, how long to stay, and how hard it is to navigate as a foreigner.</p>
+
+  <div class="city-grid">
+
+    <div class="city-card" onclick="toggleCity(this)">
+      <div class="city-card-top">
+        <div class="city-emoji-big">🏯</div>
+        <div class="city-difficulty"><div class="diff-label">Difficulty</div><div class="diff-stars">★☆☆☆☆</div></div>
+      </div>
+      <div class="city-name-zh">北京</div><div class="city-name-en">Beijing</div>
+      <div class="city-days">🗓 4–6 days</div>
+      <div class="city-best-for"><strong>Best for:</strong> History, culture, Great Wall, Chinese civilization</div>
+      <div class="city-tags"><span class="city-tag">Foreigner-friendly</span><span class="city-tag">English signs</span><span class="city-tag">Must visit</span></div>
+      <div class="city-detail">
+        <div class="city-must-see">Top 10 Must-See</div>
+        <ol class="attr-list">
+          <li><span class="attr-n">1</span>Great Wall — Mutianyu section (less crowded)</li>
+          <li><span class="attr-n">2</span>Forbidden City — book tickets online in advance</li>
+          <li><span class="attr-n">3</span>Tiananmen Square at sunrise</li>
+          <li><span class="attr-n">4</span>Temple of Heaven & morning exercise culture</li>
+          <li><span class="attr-n">5</span>Summer Palace & Kunming Lake</li>
+          <li><span class="attr-n">6</span>Hutong alleyways (Nanluogu Xiang)</li>
+          <li><span class="attr-n">7</span>Wangfujing Street food market</li>
+          <li><span class="attr-n">8</span>798 Art District — modern China</li>
+          <li><span class="attr-n">9</span>Peking duck dinner at Quanjude</li>
+          <li><span class="attr-n">10</span>Ming Tombs day trip</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="city-card" onclick="toggleCity(this)">
+      <div class="city-card-top">
+        <div class="city-emoji-big">🌃</div>
+        <div class="city-difficulty"><div class="diff-label">Difficulty</div><div class="diff-stars">★☆☆☆☆</div></div>
+      </div>
+      <div class="city-name-zh">上海</div><div class="city-name-en">Shanghai</div>
+      <div class="city-days">🗓 3–4 days</div>
+      <div class="city-best-for"><strong>Best for:</strong> Futuristic skyline, international food, modernity</div>
+      <div class="city-tags"><span class="city-tag">Most international</span><span class="city-tag">Easy for beginners</span></div>
+      <div class="city-detail">
+        <div class="city-must-see">Top 10 Must-See</div>
+        <ol class="attr-list">
+          <li><span class="attr-n">1</span>The Bund — colonial buildings facing the futuristic skyline</li>
+          <li><span class="attr-n">2</span>Yu Garden — classical Chinese garden in the city</li>
+          <li><span class="attr-n">3</span>French Concession — cafés, trees, architecture</li>
+          <li><span class="attr-n">4</span>Shanghai Museum — free, world-class</li>
+          <li><span class="attr-n">5</span>Tianzifang — artsy alleyway with shops</li>
+          <li><span class="attr-n">6</span>Shanghai Tower observation deck (632m!)</li>
+          <li><span class="attr-n">7</span>Xintiandi — modern dining & nightlife</li>
+          <li><span class="attr-n">8</span>Zhujiajiao water town (day trip, 1hr away)</li>
+          <li><span class="attr-n">9</span>Xiaolongbao at Din Tai Fung</li>
+          <li><span class="attr-n">10</span>Lujiazui skyline walk at night</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="city-card" onclick="toggleCity(this)">
+      <div class="city-card-top">
+        <div class="city-emoji-big">🐼</div>
+        <div class="city-difficulty"><div class="diff-label">Difficulty</div><div class="diff-stars">★★☆☆☆</div></div>
+      </div>
+      <div class="city-name-zh">成都</div><div class="city-name-en">Chengdu</div>
+      <div class="city-days">🗓 3–5 days</div>
+      <div class="city-best-for"><strong>Best for:</strong> Pandas, hotpot, chill vibes, authentic local life</div>
+      <div class="city-tags"><span class="city-tag">Pandas!</span><span class="city-tag">Best food city</span><span class="city-tag">Laid-back</span></div>
+      <div class="city-detail">
+        <div class="city-must-see">Top 10 Must-See</div>
+        <ol class="attr-list">
+          <li><span class="attr-n">1</span>Giant Panda Base — go at 8am for feeding time</li>
+          <li><span class="attr-n">2</span>Jinli Street — food, culture, lanterns</li>
+          <li><span class="attr-n">3</span>Authentic Chengdu hotpot dinner</li>
+          <li><span class="attr-n">4</span>People's Park teahouse — real local life</li>
+          <li><span class="attr-n">5</span>Wuhou Shrine — Three Kingdoms history</li>
+          <li><span class="attr-n">6</span>Kuanzhai Alley — old architecture</li>
+          <li><span class="attr-n">7</span>Leshan Giant Buddha (day trip, 2hrs)</li>
+          <li><span class="attr-n">8</span>Dujiangyan irrigation system (UNESCO)</li>
+          <li><span class="attr-n">9</span>Jiuzhaigou rainbow lakes (2-day trip)</li>
+          <li><span class="attr-n">10</span>Sichuan Opera face-changing show</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="city-card" onclick="toggleCity(this)">
+      <div class="city-card-top">
+        <div class="city-emoji-big">🏺</div>
+        <div class="city-difficulty"><div class="diff-label">Difficulty</div><div class="diff-stars">★★☆☆☆</div></div>
+      </div>
+      <div class="city-name-zh">西安</div><div class="city-name-en">Xi'an</div>
+      <div class="city-days">🗓 2–3 days</div>
+      <div class="city-best-for"><strong>Best for:</strong> Ancient history, Terracotta Army, Silk Road</div>
+      <div class="city-tags"><span class="city-tag">Unmissable history</span><span class="city-tag">Street food heaven</span></div>
+      <div class="city-detail">
+        <div class="city-must-see">Top 10 Must-See</div>
+        <ol class="attr-list">
+          <li><span class="attr-n">1</span>Terracotta Army — one of the world's greatest sights</li>
+          <li><span class="attr-n">2</span>Ancient City Wall — rent a bike and ride around it</li>
+          <li><span class="attr-n">3</span>Muslim Quarter food street (Huimin Jie)</li>
+          <li><span class="attr-n">4</span>Big Wild Goose Pagoda</li>
+          <li><span class="attr-n">5</span>Shaanxi History Museum (free!)</li>
+          <li><span class="attr-n">6</span>Huaqing Hot Springs (near Terracotta Army)</li>
+          <li><span class="attr-n">7</span>Bell Tower & Drum Tower at night</li>
+          <li><span class="attr-n">8</span>Rou jia mo (Chinese "burger") — must eat</li>
+          <li><span class="attr-n">9</span>Biang biang noodles in the old city</li>
+          <li><span class="attr-n">10</span>Tang Dynasty music & dance show</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="city-card" onclick="toggleCity(this)">
+      <div class="city-card-top">
+        <div class="city-emoji-big">🔥</div>
+        <div class="city-difficulty"><div class="diff-label">Difficulty</div><div class="diff-stars">★★★☆☆</div></div>
+      </div>
+      <div class="city-name-zh">重庆</div><div class="city-name-en">Chongqing</div>
+      <div class="city-days">🗓 2–3 days</div>
+      <div class="city-best-for"><strong>Best for:</strong> Cyberpunk city, hotpot capital, mountain drama</div>
+      <div class="city-tags"><span class="city-tag">Unique architecture</span><span class="city-tag">Best hotpot</span><span class="city-tag">Spicy!</span></div>
+      <div class="city-detail">
+        <div class="city-must-see">Top 10 Must-See</div>
+        <ol class="attr-list">
+          <li><span class="attr-n">1</span>Hongya Cave — stacked riverside buildings lit up at night</li>
+          <li><span class="attr-n">2</span>Jiefangbei Liberation Monument area</li>
+          <li><span class="attr-n">3</span>Chongqing hotpot — original spicy broth</li>
+          <li><span class="attr-n">4</span>Light rail through Liziba apartment building</li>
+          <li><span class="attr-n">5</span>Ciqikou Ancient Town</li>
+          <li><span class="attr-n">6</span>Yangtze River cable car crossing</li>
+          <li><span class="attr-n">7</span>Nanshan Mountain city panorama</li>
+          <li><span class="attr-n">8</span>Three Gorges cruise departure</li>
+          <li><span class="attr-n">9</span>Dazu Rock Carvings (UNESCO, day trip)</li>
+          <li><span class="attr-n">10</span>Night market — eat absolutely everything</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="city-card" onclick="toggleCity(this)">
+      <div class="city-card-top">
+        <div class="city-emoji-big">🏔️</div>
+        <div class="city-difficulty"><div class="diff-label">Difficulty</div><div class="diff-stars">★★☆☆☆</div></div>
+      </div>
+      <div class="city-name-zh">桂林</div><div class="city-name-en">Guilin</div>
+      <div class="city-days">🗓 3–4 days</div>
+      <div class="city-best-for"><strong>Best for:</strong> Nature, karst mountains, Li River scenery</div>
+      <div class="city-tags"><span class="city-tag">Jaw-dropping views</span><span class="city-tag">Outdoor adventure</span></div>
+      <div class="city-detail">
+        <div class="city-must-see">Top 10 Must-See</div>
+        <ol class="attr-list">
+          <li><span class="attr-n">1</span>Li River cruise to Yangshuo (4–5 hours)</li>
+          <li><span class="attr-n">2</span>Yangshuo countryside — bike through rice paddies</li>
+          <li><span class="attr-n">3</span>Elephant Trunk Hill</li>
+          <li><span class="attr-n">4</span>Reed Flute Cave</li>
+          <li><span class="attr-n">5</span>Longji Rice Terraces (Longsheng, 2hrs)</li>
+          <li><span class="attr-n">6</span>Moon Hill hike near Yangshuo</li>
+          <li><span class="attr-n">7</span>Impression Liu Sanjie outdoor show</li>
+          <li><span class="attr-n">8</span>West Street in Yangshuo</li>
+          <li><span class="attr-n">9</span>Guilin rice noodle cooking class</li>
+          <li><span class="attr-n">10</span>Sunrise kayak on Yulong River</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="city-card" onclick="toggleCity(this)">
+      <div class="city-card-top">
+        <div class="city-emoji-big">🌸</div>
+        <div class="city-difficulty"><div class="diff-label">Difficulty</div><div class="diff-stars">★★★★☆</div></div>
+      </div>
+      <div class="city-name-zh">泉州</div><div class="city-name-en">Quanzhou</div>
+      <div class="city-days">🗓 2–3 days</div>
+      <div class="city-best-for"><strong>Best for:</strong> Hidden gem, Maritime Silk Road, authentic local China</div>
+      <div class="city-tags"><span class="city-tag">K's hometown! 🏠</span><span class="city-tag">UNESCO 2021</span><span class="city-tag">Off the beaten path</span></div>
+      <div class="city-detail">
+        <div class="city-must-see">Top 10 Must-See</div>
+        <ol class="attr-list">
+          <li><span class="attr-n">1</span>Kaiyuan Temple — 1,300-year-old Buddhist temple</li>
+          <li><span class="attr-n">2</span>Zhongshan Road — most beautiful old street in south China</li>
+          <li><span class="attr-n">3</span>Maritime Silk Road Museum</li>
+          <li><span class="attr-n">4</span>Qingjing Mosque — China's oldest standing mosque</li>
+          <li><span class="attr-n">5</span>Guandi Temple</li>
+          <li><span class="attr-n">6</span>Chongwu Ancient Stone City (coastal)</li>
+          <li><span class="attr-n">7</span>Minnan oyster omelette & satay noodles</li>
+          <li><span class="attr-n">8</span>Nan'an Tianzhu Mountain</li>
+          <li><span class="attr-n">9</span>Quanzhou Puppet Theatre show</li>
+          <li><span class="attr-n">10</span>Xiamen day trip (1hr train) — Gulangyu Island</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="city-card" onclick="toggleCity(this)">
+      <div class="city-card-top">
+        <div class="city-emoji-big">🌊</div>
+        <div class="city-difficulty"><div class="diff-label">Difficulty</div><div class="diff-stars">★☆☆☆☆</div></div>
+      </div>
+      <div class="city-name-zh">杭州</div><div class="city-name-en">Hangzhou</div>
+      <div class="city-days">🗓 2–3 days</div>
+      <div class="city-best-for"><strong>Best for:</strong> Serenity, West Lake, tea culture, easy day trips</div>
+      <div class="city-tags"><span class="city-tag">Beautiful & calm</span><span class="city-tag">Near Shanghai</span></div>
+      <div class="city-detail">
+        <div class="city-must-see">Top 10 Must-See</div>
+        <ol class="attr-list">
+          <li><span class="attr-n">1</span>West Lake — walk, cycle, or take a boat</li>
+          <li><span class="attr-n">2</span>Lingyin Temple</li>
+          <li><span class="attr-n">3</span>Longjing Tea Village — pick your own tea</li>
+          <li><span class="attr-n">4</span>Hefang Street old culture zone</li>
+          <li><span class="attr-n">5</span>Leifeng Pagoda at sunset</li>
+          <li><span class="attr-n">6</span>Song Dynasty Town</li>
+          <li><span class="attr-n">7</span>Alibaba campus area (Xixi)</li>
+          <li><span class="attr-n">8</span>Dragon Well tea ceremony</li>
+          <li><span class="attr-n">9</span>Suzhou day trip (30min by train)</li>
+          <li><span class="attr-n">10</span>Qiantang tidal bore (autumn only)</li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════ MAP ═══════════ -->
+<section class="map-section-wrap" id="map-section">
+  <div class="map-container">
+    <div class="section-eyebrow" style="text-align:center">Explore · 探索中国</div>
+    <h2 class="section-title" style="text-align:center">Click any province to learn more</h2>
+    <p class="section-sub" style="text-align:center;margin-bottom:0">All 31 provinces, bilingual — hover for a preview, click to light it up</p>
+
+    <svg id="china-map-svg" viewBox="0 0 900 760" xmlns="http://www.w3.org/2000/svg">
+
+      <g id="heilongjiang" class="province" data-zh="黑龙江" data-en="Heilongjiang" data-desc="China's northernmost province. Ice & Snow Festival, Siberian tigers, vast forests." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="600,30 725,28 762,58 742,100 700,122 658,132 628,112 590,80"/></g>
+      <text class="prov-lbl" x="672" y="74"><tspan class="plzh" text-anchor="middle">黑龙江</tspan></text>
+      <text class="prov-lbl" x="672" y="83"><tspan class="plen" text-anchor="middle">Heilongjiang</tspan></text>
+
+      <g id="jilin" class="province" data-zh="吉林" data-en="Jilin" data-desc="Changchun & Jilin City. Ski resorts, rime ice scenery, Korean cultural heritage." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="628,112 700,122 722,152 680,172 638,156 614,136"/></g>
+      <text class="prov-lbl" x="665" y="143"><tspan class="plzh" text-anchor="middle">吉林 Jilin</tspan></text>
+
+      <g id="liaoning" class="province" data-zh="辽宁" data-en="Liaoning" data-desc="Dalian's coastline, Shenyang Imperial Palace. Gateway to Northeast China." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="614,136 638,156 680,172 692,202 650,218 614,202 594,176 600,156"/></g>
+      <text class="prov-lbl" x="638" y="186"><tspan class="plzh" text-anchor="middle">辽宁 Liaoning</tspan></text>
+
+      <g id="inner-mongolia" class="province" data-zh="内蒙古" data-en="Inner Mongolia" data-desc="Vast steppes, nomadic culture, horse riding, incredible starry skies." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="278,62 600,30 590,80 628,112 614,136 594,176 558,172 498,162 438,152 378,157 328,142 288,122 258,92"/></g>
+      <text class="prov-lbl" x="438" y="112"><tspan class="plzh" text-anchor="middle">内蒙古</tspan></text>
+      <text class="prov-lbl" x="438" y="122"><tspan class="plen" text-anchor="middle">Inner Mongolia</tspan></text>
+
+      <g id="beijing" class="province" data-zh="北京" data-en="Beijing" data-desc="China's capital. Great Wall, Forbidden City, Tiananmen. Essential first stop." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="548,172 570,162 584,177 580,194 559,197 543,187"/></g>
+      <text class="prov-lbl" x="562" y="184"><tspan class="plzh" text-anchor="middle">京</tspan></text>
+
+      <g id="tianjin" class="province" data-zh="天津" data-en="Tianjin" data-desc="Historic port city near Beijing. European architecture, famous Goubuli buns." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="568,192 584,186 596,202 580,212 564,207"/></g>
+      <text class="prov-lbl" x="580" y="203"><tspan class="plzh" text-anchor="middle">津</tspan></text>
+
+      <g id="hebei" class="province" data-zh="河北" data-en="Hebei" data-desc="Surrounds Beijing & Tianjin. Chengde Summer Palace, Zhangjiakou ski mountains." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="498,162 548,172 543,187 559,197 580,212 564,242 528,258 488,252 458,232 448,202 468,177"/></g>
+      <text class="prov-lbl" x="508" y="218"><tspan class="plzh" text-anchor="middle">河北 Hebei</tspan></text>
+
+      <g id="shanxi" class="province" data-zh="山西" data-en="Shanxi" data-desc="Ancient culture. Pingyao old city (UNESCO), Yungang Grottoes." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="448,202 488,252 478,287 453,302 428,287 418,257 428,227"/></g>
+      <text class="prov-lbl" x="450" y="255"><tspan class="plzh" text-anchor="middle">山西 Shanxi</tspan></text>
+
+      <g id="shandong" class="province" data-zh="山东" data-en="Shandong" data-desc="Birthplace of Confucius. Mount Tai, Qingdao beer, beautiful coastline." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="564,242 618,237 632,257 622,282 590,297 558,287 538,267 528,258"/></g>
+      <text class="prov-lbl" x="582" y="264"><tspan class="plzh" text-anchor="middle">山东 Shandong</tspan></text>
+
+      <g id="henan" class="province" data-zh="河南" data-en="Henan" data-desc="Heart of ancient China. Shaolin Temple, Longmen Grottoes, Yellow River." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="478,287 528,258 558,287 553,322 518,342 483,332 463,312"/></g>
+      <text class="prov-lbl" x="508" y="307"><tspan class="plzh" text-anchor="middle">河南 Henan</tspan></text>
+
+      <g id="shaanxi" class="province" data-zh="陕西" data-en="Shaanxi" data-desc="Terracotta Army, ancient Xi'an. The Silk Road begins here!" onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="378,157 438,152 448,202 428,227 418,257 428,287 408,312 378,322 358,302 353,267 363,232 368,197"/></g>
+      <text class="prov-lbl" x="394" y="245"><tspan class="plzh" text-anchor="middle">陕西 Shaanxi</tspan></text>
+
+      <g id="gansu" class="province" data-zh="甘肃" data-en="Gansu" data-desc="Silk Road corridor. Dunhuang Mogao Caves, Rainbow Mountains, Jiayuguan Fort." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="198,142 278,62 288,122 328,142 378,157 368,197 353,267 328,292 298,282 268,262 238,232 198,202 188,172"/></g>
+      <text class="prov-lbl" x="272" y="195"><tspan class="plzh" text-anchor="middle">甘肃 Gansu</tspan></text>
+
+      <g id="ningxia" class="province" data-zh="宁夏" data-en="Ningxia" data-desc="Desert meets oasis. Shapotou sand dunes, Hui Muslim culture." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="353,267 363,232 368,197 383,202 388,232 383,262 366,277"/></g>
+      <text class="prov-lbl" x="372" y="242"><tspan class="plzh" text-anchor="middle">宁夏</tspan></text>
+
+      <g id="qinghai" class="province" data-zh="青海" data-en="Qinghai" data-desc="Qinghai Lake, Tibetan plateau, breathtaking high-altitude scenery." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="148,252 198,202 238,232 268,262 298,282 308,322 278,362 238,372 198,362 168,332 143,297"/></g>
+      <text class="prov-lbl" x="224" y="298"><tspan class="plzh" text-anchor="middle">青海 Qinghai</tspan></text>
+
+      <g id="xinjiang" class="province" data-zh="新疆" data-en="Xinjiang" data-desc="China's largest region. Taklamakan Desert, Silk Road oases, Kashgar bazaar." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="28,82 198,82 198,142 188,172 198,202 148,252 143,297 98,312 58,292 28,252 18,182 22,122"/></g>
+      <text class="prov-lbl" x="108" y="188"><tspan class="plzh" text-anchor="middle">新疆 Xinjiang</tspan></text>
+
+      <g id="tibet" class="province" data-zh="西藏" data-en="Tibet" data-desc="Potala Palace, Mt. Everest Base Camp. The roof of the world." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="98,312 143,297 148,252 198,362 238,372 258,412 218,442 168,452 128,432 93,402 78,362 83,332"/></g>
+      <text class="prov-lbl" x="154" y="388"><tspan class="plzh" text-anchor="middle">西藏 Tibet</tspan></text>
+
+      <g id="sichuan" class="province" data-zh="四川" data-en="Sichuan" data-desc="Panda paradise! Spicy food, Jiuzhaigou lakes, Leshan Giant Buddha." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="298,282 328,292 353,267 366,277 383,262 388,312 378,352 353,382 318,392 288,372 268,342 258,312 268,292"/></g>
+      <text class="prov-lbl" x="322" y="334"><tspan class="plzh" text-anchor="middle">四川 Sichuan</tspan></text>
+
+      <g id="chongqing" class="province" data-zh="重庆" data-en="Chongqing" data-desc="Mountain megacity on the Yangtze. Hotpot capital, cyberpunk skyline." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="388,312 408,312 418,332 413,357 393,362 378,352"/></g>
+      <text class="prov-lbl" x="397" y="337"><tspan class="plzh" text-anchor="middle">渝</tspan></text>
+
+      <g id="guizhou" class="province" data-zh="贵州" data-en="Guizhou" data-desc="Hidden waterfalls, Huangguoshu Falls, Miao & Dong ethnic culture." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="413,357 428,347 453,357 468,377 458,402 433,417 408,402 398,382"/></g>
+      <text class="prov-lbl" x="434" y="385"><tspan class="plzh" text-anchor="middle">贵州 Guizhou</tspan></text>
+
+      <g id="yunnan" class="province" data-zh="云南" data-en="Yunnan" data-desc="Lijiang, Shangri-La, rice terraces, 25 ethnic groups. Backpacker paradise." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="258,412 288,372 318,392 353,382 378,402 393,422 383,457 353,472 308,482 278,462 258,442"/></g>
+      <text class="prov-lbl" x="313" y="432"><tspan class="plzh" text-anchor="middle">云南 Yunnan</tspan></text>
+
+      <g id="guangxi" class="province" data-zh="广西" data-en="Guangxi" data-desc="Guilin's karst mountains & Li River cruise. Zhuang ethnic culture." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="458,402 478,382 508,377 533,392 543,422 523,447 488,457 458,447 443,427"/></g>
+      <text class="prov-lbl" x="493" y="420"><tspan class="plzh" text-anchor="middle">广西 Guangxi</tspan></text>
+
+      <g id="guangdong" class="province" data-zh="广东" data-en="Guangdong" data-desc="Shenzhen tech hub, Cantonese cuisine, Pearl River Delta, dim sum culture." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="533,392 568,377 598,382 613,407 603,432 573,447 543,452 523,447"/></g>
+      <text class="prov-lbl" x="565" y="414"><tspan class="plzh" text-anchor="middle">广东 Guangdong</tspan></text>
+
+      <g id="hainan" class="province" data-zh="海南" data-en="Hainan" data-desc="China's tropical paradise. Sanya beaches, palm trees, duty-free shopping." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="528,492 558,482 578,497 568,517 543,522 523,510"/></g>
+      <text class="prov-lbl" x="550" y="504"><tspan class="plzh" text-anchor="middle">海南 Hainan</tspan></text>
+
+      <g id="hunan" class="province" data-zh="湖南" data-en="Hunan" data-desc="Avatar Mountains (Zhangjiajie), Mao's birthplace, fiercely spicy cuisine." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="478,332 518,342 543,357 543,392 508,377 478,382 458,402 433,417 428,392 438,367 453,357 463,342"/></g>
+      <text class="prov-lbl" x="487" y="372"><tspan class="plzh" text-anchor="middle">湖南 Hunan</tspan></text>
+
+      <g id="hubei" class="province" data-zh="湖北" data-en="Hubei" data-desc="Three Gorges Dam, Wuhan, Yangtze River heartland." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="453,312 483,297 518,302 538,317 543,357 518,342 478,332 463,342 453,330"/></g>
+      <text class="prov-lbl" x="495" y="325"><tspan class="plzh" text-anchor="middle">湖北 Hubei</tspan></text>
+
+      <g id="jiangsu" class="province" data-zh="江苏" data-en="Jiangsu" data-desc="Suzhou gardens, Nanjing history, water towns — China's Venice." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="558,287 588,297 618,302 618,327 593,342 568,347 553,322"/></g>
+      <text class="prov-lbl" x="585" y="318"><tspan class="plzh" text-anchor="middle">江苏 Jiangsu</tspan></text>
+
+      <g id="shanghai" class="province" data-zh="上海" data-en="Shanghai" data-desc="China's global metropolis. Iconic Bund, world-class dining, fashion." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="608,322 626,320 630,332 620,342 607,337"/></g>
+      <text class="prov-lbl" x="618" y="331"><tspan class="plzh" text-anchor="middle">沪</tspan></text>
+
+      <g id="zhejiang" class="province" data-zh="浙江" data-en="Zhejiang" data-desc="Hangzhou West Lake, tea culture, water towns. Alibaba's home." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="593,342 623,332 638,347 633,372 608,382 588,372 583,352"/></g>
+      <text class="prov-lbl" x="610" y="360"><tspan class="plzh" text-anchor="middle">浙江 Zhejiang</tspan></text>
+
+      <g id="fujian" class="province" data-zh="福建" data-en="Fujian" data-desc="Tea country, Tulou buildings, Quanzhou's Maritime Silk Road. K's hometown!" onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="608,382 633,372 658,377 663,402 643,422 613,417 598,402"/></g>
+      <text class="prov-lbl" x="630" y="398"><tspan class="plzh" text-anchor="middle">福建 Fujian</tspan></text>
+
+      <g id="jiangxi" class="province" data-zh="江西" data-en="Jiangxi" data-desc="Jingdezhen porcelain, Lushan Mountain, Wuyuan golden fields." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="568,347 593,342 583,352 588,372 608,382 598,402 573,412 553,397 543,372 548,352"/></g>
+      <text class="prov-lbl" x="572" y="378"><tspan class="plzh" text-anchor="middle">江西 Jiangxi</tspan></text>
+
+      <g id="anhui" class="province" data-zh="安徽" data-en="Anhui" data-desc="Yellow Mountain (Huangshan) — the most photographed peak in China." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="538,297 558,287 553,322 568,347 548,352 528,342 518,322 523,302"/></g>
+      <text class="prov-lbl" x="540" y="322"><tspan class="plzh" text-anchor="middle">安徽 Anhui</tspan></text>
+
+      <ellipse cx="670" cy="432" rx="14" ry="22" fill="var(--province-default)" stroke="var(--province-stroke)" stroke-width=".8" opacity=".6"/>
+      <text class="prov-lbl" x="670" y="435"><tspan class="plzh" text-anchor="middle" font-size="5.5">台湾</tspan></text>
+      <rect x="638" y="488" width="54" height="64" fill="none" stroke="var(--province-stroke)" stroke-width=".5" stroke-dasharray="3,3" rx="2" opacity=".4"/>
+      <text x="665" y="524" fill="var(--text-muted)" font-size="5" text-anchor="middle" pointer-events="none" opacity=".5">南海诸岛</text>
+    </svg>
+
+    <div id="map-active-strip" style="margin-top:8px">
+      <div id="map-pill" class="map-pill" style="display:none">
+        <span class="map-pill-zh" id="map-zh"></span>
+        <span class="map-pill-en" id="map-en"></span>
+        <span class="map-pill-btn" onclick="scrollToSection('cities-section')">→ See city guide</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════ COMMUNITY ═══════════ -->
+<section class="section" id="community-section">
+  <div class="section-eyebrow">Community · 旅行者社区</div>
+  <h2 class="section-title">Real tips from real travelers</h2>
+  <p class="section-sub">A space for foreigners who've been to China to share honest advice — and for K to post real China updates, news, and local tips.</p>
+  <div class="community-coming">
+    <div class="comm-icon">🏮</div>
+    <div class="comm-title">Community is on its way!</div>
+    <div class="comm-sub">K will be posting regular updates: what's new in China, seasonal travel tips, visa policy changes, and real stories from travelers like you. Leave your email to be first in.</div>
+    <div class="comm-notify">
+      <input class="comm-input" id="comm-email" type="email" placeholder="your@email.com"/>
+      <button class="comm-btn" onclick="communityNotify()">Notify Me</button>
+    </div>
+    <div class="comm-success" id="comm-success">✅ You're on the list! K will be in touch.</div>
+    <div style="margin-top:20px;font-size:12px;color:var(--text-muted)">Or reach K directly: <a href="mailto:katherine011004@gmail.com" style="color:var(--accent)">katherine011004@gmail.com</a></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div>
+    <div class="footer-brand">Ready? China!</div>
+    <div>Survive & Thrive with K · 为朋友们而造</div>
+  </div>
+  <div style="text-align:right;line-height:1.8">
+    <div>AI Planner · Community · Coming Soon</div>
+    <div style="opacity:.5;margin-top:4px">© 2025 Ready? China!</div>
+  </div>
+</footer>
+
+
+<!-- ═══════════ MODAL: VISA ═══════════ -->
+<div class="modal-overlay" id="visa-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div><div class="modal-title">📋 Visa Guide · 签证</div><div class="modal-subtitle">Select your nationality to see your exact options</div></div>
+      <button class="modal-close" onclick="closeModal('visa-modal')">×</button>
+    </div>
+    <div class="modal-body">
+      <input class="nationality-search" id="visa-search" placeholder="Type your country..." oninput="filterCountries()" />
+      <div class="country-list" id="country-list">
+        <div class="country-btn" onclick="showVisa(this,'us')">🇺🇸 USA</div>
+        <div class="country-btn" onclick="showVisa(this,'uk')">🇬🇧 UK</div>
+        <div class="country-btn" onclick="showVisa(this,'au')">🇦🇺 Australia</div>
+        <div class="country-btn" onclick="showVisa(this,'de')">🇩🇪 Germany</div>
+        <div class="country-btn" onclick="showVisa(this,'fr')">🇫🇷 France</div>
+        <div class="country-btn" onclick="showVisa(this,'ca')">🇨🇦 Canada</div>
+        <div class="country-btn" onclick="showVisa(this,'sg')">🇸🇬 Singapore</div>
+        <div class="country-btn" onclick="showVisa(this,'jp')">🇯🇵 Japan</div>
+        <div class="country-btn" onclick="showVisa(this,'kr')">🇰🇷 South Korea</div>
+        <div class="country-btn" onclick="showVisa(this,'nz')">🇳🇿 New Zealand</div>
+        <div class="country-btn" onclick="showVisa(this,'it')">🇮🇹 Italy</div>
+        <div class="country-btn" onclick="showVisa(this,'es')">🇪🇸 Spain</div>
+        <div class="country-btn" onclick="showVisa(this,'nl')">🇳🇱 Netherlands</div>
+        <div class="country-btn" onclick="showVisa(this,'se')">🇸🇪 Sweden</div>
+        <div class="country-btn" onclick="showVisa(this,'ch')">🇨🇭 Switzerland</div>
+        <div class="country-btn" onclick="showVisa(this,'br')">🇧🇷 Brazil</div>
+        <div class="country-btn" onclick="showVisa(this,'in')">🇮🇳 India</div>
+        <div class="country-btn" onclick="showVisa(this,'za')">🇿🇦 South Africa</div>
+      </div>
+      <div class="visa-result" id="visa-result"></div>
+      <div class="visa-free-section">
+        <div class="vf-title">🌟 144-Hour Visa-Free Transit — Eligible Countries Include:</div>
+        <div class="vf-grid">
+          <div class="vf-item">🇺🇸 United States</div><div class="vf-item">🇬🇧 United Kingdom</div>
+          <div class="vf-item">🇩🇪 Germany</div><div class="vf-item">🇫🇷 France</div>
+          <div class="vf-item">🇦🇺 Australia</div><div class="vf-item">🇨🇦 Canada</div>
+          <div class="vf-item">🇮🇹 Italy</div><div class="vf-item">🇪🇸 Spain</div>
+          <div class="vf-item">🇯🇵 Japan</div><div class="vf-item">🇰🇷 South Korea</div>
+          <div class="vf-item">🇳🇱 Netherlands</div><div class="vf-item">🇸🇪 Sweden</div>
+        </div>
+        <p style="font-size:11px;color:var(--text-muted);margin-top:10px">Must have onward ticket to a 3rd country. Valid in Beijing, Shanghai, Guangzhou, Chengdu + more cities.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ MODAL: SIM ═══════════ -->
+<div class="modal-overlay" id="sim-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div><div class="modal-title">📶 SIM Card & eSIM · 手机卡</div><div class="modal-subtitle">Stay connected from the moment you land</div></div>
+      <button class="modal-close" onclick="closeModal('sim-modal')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-note" style="margin-bottom:16px"><strong>⚠️ Important:</strong> Many Chinese hotels require a local phone number to complete check-in or send booking confirmations. Getting a SIM is not optional — it's practically required.</div>
+      <div class="info-grid">
+        <div class="info-card"><div class="info-card-title">📲 eSIM (Best Option)</div><ul class="info-list"><li>Buy on Airalo, Holafly, or China Unicom International before flying</li><li>Activates the moment you land — no waiting at airport</li><li>Works on any eSIM-compatible phone</li><li>Best option if you want zero stress on arrival</li></ul></div>
+        <div class="info-card"><div class="info-card-title">🛬 Airport SIM</div><ul class="info-list"><li>China Mobile and China Unicom counters at all major airports</li><li>Bring your passport — registration is required by law</li><li>Tourist SIMs: 30–90 days, usually unlimited data</li><li>Costs roughly ¥100–200 (about $14–28)</li></ul></div>
+        <div class="info-card"><div class="info-card-title">📡 Pocket WiFi</div><ul class="info-list"><li>Rent at the airport or pre-book online</li><li>Great for sharing data with travel companions</li><li>Return at end of trip — refundable deposit</li><li>Good backup if SIM doesn't work for your phone</li></ul></div>
+      </div>
+      <div class="modal-note" style="margin-top:14px">💡 <strong>K's recommendation:</strong> Get an eSIM on Airalo before you fly. China Mobile eSIM has excellent coverage. If your phone doesn't support eSIM, buy at the China Mobile counter in arrivals — look for the bright blue signs.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ MODAL: PAYMENT ═══════════ -->
+<div class="modal-overlay" id="payment-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div><div class="modal-title">💳 Payments in China · 支付</div><div class="modal-subtitle">China is almost entirely cashless — here's how to survive</div></div>
+      <button class="modal-close" onclick="closeModal('payment-modal')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-note" style="margin-bottom:16px"><strong>The reality:</strong> Even tiny street food stalls only accept QR code payments. No Alipay or WeChat Pay = real trouble. My friend literally couldn't pay for his meal. Set this up at home.</div>
+      <div class="app-list">
+        <div class="app-item"><div class="app-icon-box">💳</div><div><div class="app-name">Alipay 支付宝 — Priority #1</div><div class="app-desc">Now officially supports foreign Visa/Mastercard/Amex directly. Download, register with your phone number, link your card, done. Used at literally everything — restaurants, taxis, markets, convenience stores.</div><div class="app-tip">✅ Foreigners: use the "International" version. Link your card in Settings → Bank Cards.</div></div></div>
+        <div class="app-item"><div class="app-icon-box">💬</div><div><div class="app-name">WeChat Pay 微信支付</div><div class="app-desc">Built into WeChat. Also supports foreign cards now but the setup is slightly more complex. Worth setting up as a backup.</div><div class="app-tip">✅ You'll need WeChat anyway — set up the payment while you're at it.</div></div></div>
+        <div class="app-item"><div class="app-icon-box">💵</div><div><div class="app-name">Cash (Backup)</div><div class="app-desc">Bring ¥500–1000 RMB as emergency backup. Some older vendors, temples, and rural areas still prefer cash. Exchange at Bank of China — best rates.</div><div class="app-tip">⚠️ Notify your home bank before travel to prevent card blocks at ATMs.</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ MODAL: NETWORK ═══════════ -->
+<div class="modal-overlay" id="network-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div><div class="modal-title">🌐 Internet & Social Media · 网络</div><div class="modal-subtitle">The Great Firewall — what's blocked and how to stay connected</div></div>
+      <button class="modal-close" onclick="closeModal('network-modal')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-note" style="margin-bottom:16px"><strong>Why are apps blocked?</strong> China operates a national internet filter called the "Great Firewall." It's not a glitch — it's government policy. Google, Instagram, WhatsApp, Facebook, YouTube, and most Western news sites are blocked.</div>
+      <div class="app-list">
+        <div class="app-item"><div class="app-icon-box">🚫</div><div><div class="app-name">What doesn't work in China</div><div class="app-desc">Google (Search, Maps, Gmail, YouTube), Instagram, Facebook, WhatsApp, Twitter/X, Snapchat, most news websites, Spotify, Netflix, and many Western services.</div><div class="app-tip">⚠️ Even some hotel WiFis are filtered.</div></div></div>
+        <div class="app-item"><div class="app-icon-box">🔐</div><div><div class="app-name">VPN — The Golden Rule</div><div class="app-desc">Download and TEST your VPN BEFORE flying. Once in China, the App Store and Play Store are filtered and you cannot easily download VPN apps. This is the #1 mistake first-timers make.</div><div class="app-tip">💡 K's picks: ExpressVPN (most reliable) + Astrill as backup. Free VPNs almost never work.</div></div></div>
+        <div class="app-item"><div class="app-icon-box">✅</div><div><div class="app-name">What you can use instead</div><div class="app-desc">WeChat (messaging), Amap/Gaode (maps & navigation), Dianping (restaurant reviews — China's Yelp), Weibo (social media), Bilibili (video), Baidu (search).</div><div class="app-tip">✅ All Chinese apps work perfectly without VPN.</div></div></div>
+      </div>
+      <div class="modal-note" style="margin-top:14px">⚖️ <strong>Legal note:</strong> VPN use by tourists is a gray area. Millions of tourists use them every year without issue. Use for personal access only.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ MODAL: APPS ═══════════ -->
+<div class="modal-overlay" id="apps-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div><div class="modal-title">📱 Essential Apps · 必备APP</div><div class="modal-subtitle">Download these 6 before you fly — they run your entire trip</div></div>
+      <button class="modal-close" onclick="closeModal('apps-modal')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="app-list">
+        <div class="app-item"><div class="app-icon-box">💬</div><div><div class="app-name">WeChat 微信 — Everything App</div><div class="app-desc">Messaging, payments, mini-programs, food ordering, maps. Without WeChat, China is very hard. Set it up before arrival and link a payment method.</div><div class="app-tip">✅ Register with your phone number. Add your Chinese friends so they can show you around.</div></div></div>
+        <div class="app-item"><div class="app-icon-box">💳</div><div><div class="app-name">Alipay 支付宝 — Pay for Everything</div><div class="app-desc">China's dominant payment platform. Foreign cards now accepted. Street food, taxis, supermarkets — all QR code.</div><div class="app-tip">✅ Link your Visa/Mastercard in Settings. Do this BEFORE you arrive.</div></div></div>
+        <div class="app-item"><div class="app-icon-box">🚗</div><div><div class="app-name">Didi 滴滴 — China's Uber</div><div class="app-desc">Works in English. No language barrier. Much cheaper than taxis. The driver comes to you — no hailing required.</div><div class="app-tip">✅ Set your pickup and destination in English, the app handles the translation.</div></div></div>
+        <div class="app-item"><div class="app-icon-box">🗺️</div><div><div class="app-name">Amap 高德地图 — Navigation</div><div class="app-desc">Google Maps doesn't work well in China. Amap (Gaode) is the most accurate map — it has an English mode and works offline.</div><div class="app-tip">✅ Switch to English in Settings. Download your city maps offline before exploring.</div></div></div>
+        <div class="app-item"><div class="app-icon-box">🍜</div><div><div class="app-name">大众点评 Dianping — Where to Eat</div><div class="app-desc">China's version of Yelp + TripAdvisor. Every restaurant, café, and attraction rated and reviewed. Filter by "foreigner-friendly" or "English menu".</div><div class="app-tip">✅ Use it to find the best local spots tourists never discover.</div></div></div>
+        <div class="app-item"><div class="app-icon-box">🚆</div><div><div class="app-name">Trip.com (携程) — Book Everything</div><div class="app-desc">Trains, flights, hotels all in one English-language app. Much easier than the official 12306 rail app for foreigners. Supports foreign payment cards.</div><div class="app-tip">✅ Book high-speed rail here — it's the most reliable way as a foreigner.</div></div></div>
+      </div>
+      <div class="modal-note" style="margin-top:14px">🔤 <strong>For translation:</strong> Download Google Translate with the Chinese offline pack (before you fly). Pleco is the best Chinese dictionary — point your camera at any text to translate instantly.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ MODAL: TRANSPORT ═══════════ -->
+<div class="modal-overlay" id="transport-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div><div class="modal-title">🚄 Getting Around China · 交通</div><div class="modal-subtitle">The world's best rail network, easy metro, and Didi for taxis</div></div>
+      <button class="modal-close" onclick="closeModal('transport-modal')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="info-grid">
+        <div class="info-card"><div class="info-card-title">🚄 High-Speed Rail</div><ul class="info-list"><li>World's best rail system — use it between cities!</li><li>Beijing → Shanghai: 4.5 hours (vs 1.5hr flight + 3hr airport process)</li><li>Book on Trip.com with your passport number</li><li>G trains = fastest, D trains = fast, C = city rail</li><li>Bring your passport to collect tickets at the station</li></ul></div>
+        <div class="info-card"><div class="info-card-title">🚇 Metro</div><ul class="info-list"><li>Every major city has modern, cheap metro</li><li>Machines have English — easy to use</li><li>Or scan QR code in WeChat/Alipay at gates</li><li>¥3–10 per journey — extremely affordable</li><li>Covers all tourist spots in major cities</li></ul></div>
+        <div class="info-card"><div class="info-card-title">🚗 Didi (Taxi App)</div><ul class="info-list"><li>Like Uber — book in the app, no language needed</li><li>Show the destination text to driver if unsure</li><li>Very affordable: ¥20–40 for most city rides</li><li>Also: 曹操出行, 花小猪 (cheaper Didi alternatives)</li><li>Never use unlicensed taxis at airports!</li></ul></div>
+        <div class="info-card"><div class="info-card-title">✈️ Domestic Flights</div><ul class="info-list"><li>Best for very long distances (Beijing → Yunnan)</li><li>Book on Trip.com — English support</li><li>Arrive 2 hours early — security is thorough</li><li>Budget airlines: Xiamen Air, Shenzhen Airlines</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ MODAL: ABOUT K ═══════════ -->
+<div class="modal-overlay" id="about-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div><div class="modal-title">🙋‍♀️ About K · 关于我</div><div class="modal-subtitle">The person behind Ready? China!</div></div>
+      <button class="modal-close" onclick="closeModal('about-modal')">×</button>
+    </div>
+    <div class="modal-body" style="padding:0">
+      <div class="about-card">
+        <div class="about-top">
+          <div class="about-avatar">🌏</div>
+          <div class="about-intro">
+            <div class="about-name">Hey, I'm K!</div>
+            <div class="about-role">Local Chinese · World Traveler · Your China Guide</div>
+            <div class="about-flags">🇵🇭 🇭🇰 🇨🇳 🇦🇺</div>
+          </div>
+        </div>
+        <div class="about-body">
+          <div class="about-story">
+            Born in the Philippines, grew up between Hong Kong, Quanzhou China, and studied in Australia — I've lived in four places and carry a little piece of all of them.<br><br>
+            Now I'm back in China, and I keep inviting my foreign friends to come visit me. The problem? Every single one of them panics when they start planning. "I don't know where to start." "Will I survive without Google?" "Can I actually pay for things?" "Is it safe?"<br><br>
+            So I built this — a website I wish existed when my friends first asked me those questions. I'll be their tour guide, and yours too, step by step.
+          </div>
+          <div class="about-examples">
+            <div class="about-ex"><div class="about-ex-icon">📶</div><div class="about-ex-text">My Australian friend landed in Shanghai and spent <strong>2 hours at the airport</strong> trying to get wifi. His phone had no signal and he couldn't contact the hotel. He was stuck.</div></div>
+            <div class="about-ex"><div class="about-ex-icon">💳</div><div class="about-ex-text">Another friend <strong>couldn't pay for dinner</strong> — he thought credit cards worked everywhere. The restaurant only took WeChat Pay. A stranger finally helped him. He was so embarrassed.</div></div>
+            <div class="about-ex"><div class="about-ex-icon">🗺️</div><div class="about-ex-text">A third friend wanted to go somewhere "off the tourist path" but had no idea where. She ended up following everyone to Shanghai and Chengdu, missing <strong>so many hidden gems</strong>.</div></div>
+          </div>
+          <div class="about-story" style="margin-bottom:16px">
+            Traveling in China sounds difficult, but for my friends — the ones I miss — I will be right here, guiding you through every step. You're not alone. 在中国旅游听起来很难，但我会一直陪在你们身边。
+          </div>
+          <div class="about-contact">
+            <span>📧</span>
+            <span>Questions? Stories? Just want to say hi? Email K directly: <a href="mailto:katherine011004@gmail.com">katherine011004@gmail.com</a></span>
+          </div>
+          <div class="about-hometown">家乡：福建泉州 · Hometown: Quanzhou, Fujian, China 🏮</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ MODAL: PLANNING ═══════════ -->
+<div class="modal-overlay" id="planning-modal">
+  <div class="modal-box" style="max-width:540px">
+    <div class="modal-header">
+      <div><div class="modal-title">🤖 AI Trip Planner · 智能行程</div><div class="modal-subtitle">Your perfect China itinerary, generated in seconds</div></div>
+      <button class="modal-close" onclick="closeModal('planning-modal')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="planner-teaser">
+        <div class="planner-icon">✨</div>
+        <div class="planner-h">Coming Soon — Your dream China trip, planned by AI</div>
+        <div class="planner-p">Tell us your budget, how many days, the season you're visiting, and what you love — and we'll generate a complete personalized itinerary with routes, food spots, and local gems.</div>
+        <div class="feature-list">
+          <div class="feat-item"><span class="feat-icon">🗓️</span>Choose your days & season</div>
+          <div class="feat-item"><span class="feat-icon">💸</span>Budget, mid-range or luxury versions</div>
+          <div class="feat-item"><span class="feat-icon">❤️</span>Pick your interests: food · history · nature · nightlife</div>
+          <div class="feat-item"><span class="feat-icon">🚄</span>Optimized routes between cities</div>
+          <div class="feat-item"><span class="feat-icon">📥</span>Export & share with your travel group</div>
+        </div>
+        <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px">Be first to know when it launches 👇</p>
+        <div class="notify-row">
+          <input class="notify-input" id="plan-email" type="email" placeholder="your@email.com"/>
+          <button class="notify-btn" onclick="plannerNotify()">Notify Me</button>
+        </div>
+        <div class="notify-ok" id="plan-ok">🎉 Amazing! You're on the list.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── MENU ──
+function toggleMenu(){document.getElementById('menu-btn').classList.toggle('open');document.getElementById('menu-dropdown').classList.toggle('show')}
+function closeMenu(){document.getElementById('menu-btn').classList.remove('open');document.getElementById('menu-dropdown').classList.remove('show')}
+document.addEventListener('click',e=>{const b=document.getElementById('menu-btn'),d=document.getElementById('menu-dropdown');if(!b.contains(e.target)&&!d.contains(e.target))closeMenu()})
+
+// ── SCROLL ──
+function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});closeMenu()}
+
+// ── TOOLTIP ──
+function showTip(e,el){
+  const t=document.getElementById('prov-tip');
+  document.getElementById('tip-zh').textContent=el.dataset.zh||'';
+  document.getElementById('tip-en').textContent=el.dataset.en||'';
+  document.getElementById('tip-desc').textContent=el.dataset.desc||'';
+  t.style.display='block';moveTip(e)
+}
+function moveTip(e){
+  const t=document.getElementById('prov-tip');
+  let x=e.clientX+16,y=e.clientY-10;
+  if(x+220>window.innerWidth)x=e.clientX-225;
+  if(y+120>window.innerHeight)y=e.clientY-120;
+  t.style.left=x+'px';t.style.top=y+'px'
+}
+function hideTip(){document.getElementById('prov-tip').style.display='none'}
+document.getElementById('china-map-svg').addEventListener('mousemove',e=>{if(document.getElementById('prov-tip').style.display==='block')moveTip(e)})
+
+// ── MAP SELECT ──
+let activeProv=null;
+function selectProv(el){
+  if(activeProv)activeProv.classList.remove('active');
+  if(activeProv===el){activeProv=null;document.getElementById('map-pill').style.display='none';return}
+  el.classList.add('active');activeProv=el;
+  document.getElementById('map-zh').textContent=el.dataset.zh;
+  document.getElementById('map-en').textContent=el.dataset.en;
+  document.getElementById('map-pill').style.display='inline-flex'
+}
+
+// ── CHECKLIST ──
+const steps=['step-passport','step-visa','step-flights','step-esim','step-payment','step-network','step-apps','step-transport','step-customs'];
+const statusMsgs=['Just getting started — your adventure awaits! 🌱','Great start! Passport sorted ✅','Visa sorted — you\'re officially going! 🎉','Flights & hotel booked — it\'s real now! 🛫','SIM ready — you\'ll have signal the moment you land 📶','Payments sorted — you can eat ANYTHING 🍜','Connected — Instagram works in China too 🌐','Apps ready — you\'re basically a local 📱','Transport sorted — rail, metro, Didi — you\'ve got this 🚄','100% CHINA READY! See you there! 🇨🇳🎊'];
+function toggleStep(id){
+  const el=document.getElementById(id);
+  el.classList.toggle('done');
+  updateProgress()
+}
+function updateProgress(){
+  const done=steps.filter(s=>document.getElementById(s).classList.contains('done')).length;
+  const pct=Math.round((done/steps.length)*100);
+  document.getElementById('prog-bar').style.width=pct+'%';
+  document.getElementById('pct-label').textContent=pct+'%';
+  document.getElementById('prog-status').textContent=statusMsgs[done]||statusMsgs[0]
+}
+
+// ── CITIES ──
+function toggleCity(card){
+  const d=card.querySelector('.city-detail');
+  const wasOpen=d.classList.contains('open');
+  document.querySelectorAll('.city-detail').forEach(x=>x.classList.remove('open'));
+  document.querySelectorAll('.city-card').forEach(c=>c.style.borderColor='');
+  if(!wasOpen){d.classList.add('open');card.style.borderColor='var(--accent)'}
+}
+
+// ── MODALS ──
+function openModal(id){document.getElementById(id).classList.add('show');document.body.style.overflow='hidden'}
+function closeModal(id){document.getElementById(id).classList.remove('show');document.body.style.overflow=''}
+document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click',function(e){if(e.target===this)closeModal(this.id)}))
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.modal-overlay.show').forEach(m=>closeModal(m.id));closeMenu()}})
+
+// ── VISA ──
+const visaDB={
+  us:{flag:'🇺🇸',name:'United States',type:'Visa Required',detail:'Apply for a <strong>10-year multiple-entry L (Tourist) visa</strong> at the Chinese Embassy or Consulate in your state. Fees and processing vary by city. Also eligible for <strong style="color:var(--gold)">144-hour visa-free transit</strong> through Beijing, Shanghai, Guangzhou and more.',link:'https://www.visaforchina.cn/globle/'},
+  uk:{flag:'🇬🇧',name:'United Kingdom',type:'✅ Visa-Free (15 days)',detail:'UK citizens enjoy <strong style="color:var(--gold)">15-day visa-free entry</strong> (expanded 2024 policy). For longer stays, apply for an L visa at the Chinese Embassy in London. Also eligible for 144-hour transit visa-free.',link:'https://www.visaforchina.cn/LON2_EN/'},
+  au:{flag:'🇦🇺',name:'Australia',type:'Visa Required',detail:'Apply for a tourist (L) visa at the Chinese Embassy in Canberra or consulates in Sydney/Melbourne. Processing: 4–7 business days. Also eligible for <strong style="color:var(--gold)">144-hour transit visa-free</strong>.',link:'https://www.china-embassy.gov.cn/eng/'},
+  de:{flag:'🇩🇪',name:'Germany',type:'✅ Visa-Free (15 days)',detail:'German citizens enjoy <strong style="color:var(--gold)">15-day visa-free entry</strong> (expanded 2024). No application needed for short trips. For longer stays, apply for a tourist visa. 144-hour transit also available.',link:'https://www.visaforchina.cn/BER2_EN/'},
+  fr:{flag:'🇫🇷',name:'France',type:'✅ Visa-Free (15 days)',detail:'French citizens enjoy <strong style="color:var(--gold)">15-day visa-free entry</strong> (expanded 2024). For longer stays, apply at the Chinese Consulate in Paris.',link:'https://www.visaforchina.cn/PAR2_EN/'},
+  ca:{flag:'🇨🇦',name:'Canada',type:'Visa Required',detail:'Canadians must apply for an L (Tourist) visa. Apply at the Chinese Consulate in Toronto, Vancouver, or Calgary. Processing: 4–7 days. <strong style="color:var(--gold)">144-hour transit visa-free</strong> also available.',link:'https://www.visaforchina.cn/globle/'},
+  sg:{flag:'🇸🇬',name:'Singapore',type:'✅ Visa-Free (30 days)',detail:'Singapore citizens enjoy <strong style="color:var(--gold)">30-day visa-free entry</strong>. No application needed for tourist visits under 30 days. Excellent bilateral relations with China.',link:'https://www.mfa.gov.cn/ce/cesg//eng/'},
+  jp:{flag:'🇯🇵',name:'Japan',type:'✅ Visa-Free (15 days)',detail:'Japanese citizens enjoy <strong style="color:var(--gold)">15-day visa-free entry</strong> (restored 2024). For longer stays, apply for tourist visa at Chinese Embassy in Tokyo.',link:'https://www.visaforchina.cn/TYO2_EN/'},
+  kr:{flag:'🇰🇷',name:'South Korea',type:'✅ Visa-Free (15 days)',detail:'Korean citizens enjoy <strong style="color:var(--gold)">15-day visa-free entry</strong> (expanded 2024). For longer stays, apply for tourist visa.',link:'https://www.visaforchina.cn/SEL_EN/'},
+  nz:{flag:'🇳🇿',name:'New Zealand',type:'Visa Required',detail:'New Zealanders must apply for an L (Tourist) visa at the Chinese Embassy in Wellington or Consulate in Auckland. Processing: 4–7 days. 144-hour transit visa-free available.',link:'https://www.visaforchina.cn/globle/'},
+  it:{flag:'🇮🇹',name:'Italy',type:'✅ Visa-Free (15 days)',detail:'Italian citizens enjoy <strong style="color:var(--gold)">15-day visa-free entry</strong> (2024 policy). 144-hour transit visa-free also available.',link:'https://www.visaforchina.cn/ROM2_EN/'},
+  es:{flag:'🇪🇸',name:'Spain',type:'✅ Visa-Free (15 days)',detail:'Spanish citizens enjoy <strong style="color:var(--gold)">15-day visa-free entry</strong> (2024 policy). For longer stays, apply at the Chinese Embassy in Madrid.',link:'https://www.visaforchina.cn/MAD2_EN/'},
+  nl:{flag:'🇳🇱',name:'Netherlands',type:'✅ Visa-Free (15 days)',detail:'Dutch citizens enjoy <strong style="color:var(--gold)">15-day visa-free entry</strong> (2024). 144-hour transit also available.',link:'https://www.visaforchina.cn/AMS_EN/'},
+  se:{flag:'🇸🇪',name:'Sweden',type:'✅ Visa-Free (15 days)',detail:'Swedish citizens enjoy <strong style="color:var(--gold)">15-day visa-free entry</strong> (2024 policy).',link:'https://www.visaforchina.cn/STO_EN/'},
+  ch:{flag:'🇨🇭',name:'Switzerland',type:'Visa Required',detail:'Swiss citizens must apply for a tourist visa. Apply at the Chinese Embassy in Bern. Processing: 4–7 days.',link:'https://www.visaforchina.cn/globle/'},
+  br:{flag:'🇧🇷',name:'Brazil',type:'✅ Visa-Free (30 days)',detail:'Brazilian citizens enjoy <strong style="color:var(--gold)">30-day visa-free entry</strong> under the bilateral agreement.',link:'https://www.visaforchina.cn/globle/'},
+  in:{flag:'🇮🇳',name:'India',type:'Visa Required',detail:'Indian citizens must apply for a tourist visa at the Chinese Embassy in New Delhi or consulates in Mumbai/Kolkata/Chennai. Processing: 5–10 days.',link:'https://www.visaforchina.cn/globle/'},
+  za:{flag:'🇿🇦',name:'South Africa',type:'Visa Required',detail:'South African citizens must apply for a tourist visa at the Chinese Embassy in Pretoria. Processing: 5–7 days.',link:'https://www.visaforchina.cn/globle/'},
+};
+
+function showVisa(btn,code){
+  document.querySelectorAll('.country-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  const v=visaDB[code];
+  const res=document.getElementById('visa-result');
+  res.innerHTML=`<strong>${v.flag} ${v.name}</strong> — <strong style="color:var(--accent)">${v.type}</strong><br><br>${v.detail}<br><br>🔗 <a href="${v.link}" target="_blank" rel="noopener">Official Application Portal →</a>`;
+  res.classList.add('show')
+}
+
+function filterCountries(){
+  const q=document.getElementById('visa-search').value.toLowerCase();
+  document.querySelectorAll('.country-btn').forEach(b=>{
+    b.style.display=b.textContent.toLowerCase().includes(q)?'':'none'
+  })
+}
+
+// ── NOTIFY ──
+function communityNotify(){
+  const e=document.getElementById('comm-email').value;
+  if(!e||!e.includes('@')){alert('Please enter a valid email.');return}
+  document.getElementById('comm-success').style.display='block';
+  document.getElementById('comm-email').value=''
+}
+function plannerNotify(){
+  const e=document.getElementById('plan-email').value;
+  if(!e||!e.includes('@')){alert('Please enter a valid email.');return}
+  document.getElementById('plan-ok').style.display='block';
+  document.getElementById('plan-email').value=''
+}
+</script>
+</body>
+</html>
