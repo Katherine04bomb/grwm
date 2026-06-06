@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Ready with Me · Ready? China!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+/* ── CHECKLIST ── Edit steps content here ── */
+.checklist-steps{display:flex;flex-direction:column;gap:16px;margin-bottom:32px}
+.check-step{background:white;border:1px solid var(--border);border-radius:12px;padding:18px 22px;display:flex;align-items:flex-start;gap:16px;transition:all .25s}
+.check-step:hover{border-color:var(--accent);box-shadow:0 4px 20px rgba(192,57,43,0.08)}
+.check-step.done{background:rgba(39,174,96,0.04);border-color:rgba(39,174,96,0.3)}
+.check-step.done .step-check{background:#27ae60;border-color:#27ae60}
+.check-step.done .step-check::after{content:'✓';color:white;font-size:14px;font-weight:700}
+.step-check{width:32px;height:32px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;margin-top:2px}
+.step-check:hover{border-color:var(--accent)}
+.step-num-label{font-size:10px;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.step-title-main{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px}
+.step-desc-main{font-size:12px;color:var(--text-muted);line-height:1.5}
+.step-action{margin-left:auto;flex-shrink:0}
+.step-btn{background:var(--red-soft);border:1px solid var(--red-border);color:var(--accent);padding:7px 14px;border-radius:6px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;white-space:nowrap}
+.step-btn:hover{background:var(--accent);color:white}
+/* ── PROGRESS BAR ── */
+.progress-area{background:white;border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:32px}
+.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.progress-label{font-size:13px;color:var(--text);font-weight:500}
+.progress-pct{font-size:22px;font-weight:700;color:var(--accent);font-family:'Playfair Display',serif}
+.progress-bar-bg{height:10px;background:var(--surface2);border-radius:10px;overflow:hidden}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--gold-light));border-radius:10px;transition:width .6s ease;width:0%}
+.progress-status{font-size:11px;color:var(--text-muted);margin-top:8px}
+/* ── VISA MODAL ── */
+.nationality-search{width:100%;padding:10px 16px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--text);outline:none;margin-bottom:12px;transition:border-color .2s}
+.nationality-search:focus{border-color:var(--gold)}
+.country-list{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;max-height:200px;overflow-y:auto}
+.country-btn{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:7px 12px;cursor:pointer;font-size:12px;color:var(--text-mid);transition:all .2s;display:flex;align-items:center;gap:6px}
+.country-btn:hover,.country-btn.selected{border-color:var(--gold);background:var(--gold-soft);color:var(--gold)}
+.visa-result{display:none;background:var(--surface);border-left:3px solid var(--gold-light);padding:16px;border-radius:0 8px 8px 0;font-size:12px;color:var(--text-muted);line-height:1.8;margin-top:12px}
+.visa-result.show{display:block}
+.visa-result strong{color:var(--text)}
+.visa-result a{color:var(--gold)}
+.vf-title{font-size:12px;color:var(--gold);letter-spacing:1px;font-weight:600;margin-bottom:10px;margin-top:20px}
+.vf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:6px}
+.vf-item{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--surface);border:1px solid var(--border);border-radius:6px;font-size:11px;color:var(--text-mid)}
+/* planner + about modal styles */
+.about-card{background:white;border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.about-top{background:linear-gradient(135deg,var(--accent) 0%,#8b1a1a 100%);padding:32px;display:flex;align-items:flex-start;gap:20px}
+.about-avatar{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;border:2px solid rgba(255,255,255,.4)}
+.about-intro .about-name{font-family:'Playfair Display',serif;font-size:22px;color:white;margin-bottom:4px}
+.about-intro .about-role{font-size:11px;color:rgba(255,255,255,.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.about-intro .about-flags{font-size:20px;letter-spacing:4px}
+.about-body{padding:28px}
+.about-story{font-size:13px;color:var(--text-mid);line-height:1.8;margin-bottom:20px}
+.about-examples{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.about-ex{display:flex;gap:12px;padding:14px;background:var(--surface);border-radius:8px;border:1px solid var(--border)}
+.about-ex-icon{font-size:20px;flex-shrink:0}
+.about-ex-text{font-size:12px;color:var(--text-muted);line-height:1.6}
+.about-contact{display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--red-soft);border:1px solid var(--red-border);border-radius:8px;font-size:12px;color:var(--text-mid)}
+.about-contact a{color:var(--accent);font-weight:500}
+.about-hometown{font-family:'Noto Serif SC',serif;font-size:13px;color:var(--accent);margin-top:12px}
+.planner-teaser{text-align:center;padding:10px 0}
+.planner-icon{font-size:48px;margin-bottom:16px}
+.planner-h{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);margin-bottom:10px}
+.planner-p{font-size:13px;color:var(--text-muted);line-height:1.7;max-width:420px;margin:0 auto 24px}
+.feature-list{display:flex;flex-direction:column;gap:8px;max-width:380px;margin:0 auto 24px;text-align:left}
+.feat-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--text-muted)}
+.feat-icon{font-size:16px}
+.notify-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.notify-input{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:10px 16px;border-radius:6px;font-size:12px;outline:none;width:210px;font-family:'DM Sans',sans-serif}
+.notify-btn{background:var(--accent);color:white;border:none;padding:10px 18px;border-radius:6px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif}
+.notify-ok{font-size:12px;color:var(--gold);margin-top:10px;display:none}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-area">
+    <div class="logo-travelers">
+      <div class="traveler"><svg width="20" height="32" viewBox="0 0 20 32" fill="none"><circle cx="10" cy="4.5" r="3.5" fill="#c0392b" opacity=".85"/><rect x="6" y="9" width="8" height="13" rx="2" fill="#c0392b" opacity=".85"/><rect x="12.5" y="10" width="5" height="7" rx="1.5" fill="#9a7b2f" opacity=".9"/><line x1="7.5" y1="22" x2="5.5" y2="31" stroke="#c0392b" stroke-width="2.5" stroke-linecap="round" opacity=".85"/><line x1="12.5" y1="22" x2="14.5" y2="31" stroke="#c0392b" stroke-width="2.5" stroke-linecap="round" opacity=".85"/></svg></div>
+      <div class="traveler"><svg width="18" height="30" viewBox="0 0 18 30" fill="none"><circle cx="9" cy="4" r="3" fill="#9a7b2f" opacity=".8"/><rect x="5.5" y="8" width="7" height="12" rx="2" fill="#9a7b2f" opacity=".8"/><rect x="11" y="9" width="4.5" height="6.5" rx="1.5" fill="#c0392b" opacity=".7"/><line x1="7" y1="20" x2="5.5" y2="29" stroke="#9a7b2f" stroke-width="2.2" stroke-linecap="round" opacity=".8"/><line x1="11" y1="20" x2="12.5" y2="29" stroke="#9a7b2f" stroke-width="2.2" stroke-linecap="round" opacity=".8"/></svg></div>
+      <div class="traveler"><svg width="16" height="28" viewBox="0 0 16 28" fill="none"><circle cx="8" cy="3.5" r="2.8" fill="#4a3c28" opacity=".6"/><rect x="5" y="7" width="6" height="11" rx="2" fill="#4a3c28" opacity=".6"/><rect x="9.5" y="8" width="4" height="6" rx="1.5" fill="#c0392b" opacity=".55"/><line x1="6.5" y1="18" x2="5" y2="27" stroke="#4a3c28" stroke-width="2" stroke-linecap="round" opacity=".6"/><line x1="9.5" y1="18" x2="11" y2="27" stroke="#4a3c28" stroke-width="2" stroke-linecap="round" opacity=".6"/></svg></div>
+    </div>
+    <div class="logo-text">
+      <div class="logo-main"><a href="index.html" style="text-decoration:none;color:inherit">Ready? China!</a></div>
+      <div class="logo-sub">Survive &amp; Thrive with K</div>
+    </div>
+  </div>
+  <nav>
+    <a class="nav-link" href="get-ready.html" style="color:var(--accent)">Get Ready with Me</a>
+    <a class="nav-link" href="cities.html">Cities</a>
+    <a class="nav-link" href="community.html">Community</a>
+    <button class="nav-link nav-cta" onclick="openModal('planning-modal')"><span class="soon-tag">SOON</span>Start Planning</button>
+  </nav>
+</header>
+
+<button id="menu-btn" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+<div id="menu-dropdown">
+  <div class="menu-item" onclick="window.location='get-ready.html'"><div class="menu-icon">✅</div><div><div class="menu-item-title">Get Ready with Me</div><div class="menu-item-sub">Step-by-step checklist</div></div><span class="mbadge mbadge-red">START</span></div>
+  <div class="menu-item" onclick="window.location='cities.html'"><div class="menu-icon">🗺️</div><div><div class="menu-item-title">Cities</div><div class="menu-item-sub">Where should I go?</div></div></div>
+  <div class="menu-item" onclick="window.location='china-map.html'"><div class="menu-icon">📍</div><div><div class="menu-item-title">Explore the Map</div><div class="menu-item-sub">All 31 provinces</div></div></div>
+  <div class="menu-item" onclick="window.location='community.html'"><div class="menu-icon">👥</div><div><div class="menu-item-title">Community</div><div class="menu-item-sub">Tips from real travelers</div></div><span class="mbadge mbadge-gray">SOON</span></div>
+  <div class="menu-item" onclick="openModal('about-modal');closeMenu()"><div class="menu-icon">🙋‍♀️</div><div><div class="menu-item-title">About K</div><div class="menu-item-sub">Who built this &amp; why</div></div></div>
+  <div class="menu-item" onclick="openModal('planning-modal');closeMenu()"><div class="menu-icon">🤖</div><div><div class="menu-item-title">AI Trip Planner</div><div class="menu-item-sub">Auto itinerary</div></div><span class="mbadge mbadge-gray">SOON</span></div>
+</div>
+<div id="prov-tip"><div class="tzh" id="tip-zh"></div><div class="ten" id="tip-en"></div><div class="tdesc" id="tip-desc"></div></div>
+
+<main>
+<section class="section">
+  <div class="section-eyebrow">Step by Step · 出发准备</div>
+  <h2 class="section-title">Get Ready with Me</h2>
+  <p class="section-sub">Tick each step as you complete it. Your China readiness score updates in real time.</p>
+
+  <!-- ── PROGRESS BAR ── -->
+  <div class="progress-area">
+    <div class="progress-header">
+      <div class="progress-label">🇨🇳 China Ready Score</div>
+      <div class="progress-pct" id="pct-label">0%</div>
+    </div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="prog-bar"></div></div>
+    <div class="progress-status" id="prog-status">Complete the steps below to track your readiness</div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       CHECKLIST STEPS
+       To edit: change the text inside each
+       .step-title-main and .step-desc-main
+  ══════════════════════════════════════ -->
+  <div class="checklist-steps">
+
+    <div class="check-step" id="step-passport">
+      <div class="step-check" onclick="toggleStep('step-passport')"></div>
+      <div style="flex:1">
+        <div class="step-num-label">Step 1</div>
+        <div class="step-title-main">🛂 Check Your Passport</div>
+        <div class="step-desc-main">Is it still valid? China requires at least 6 months validity beyond your travel dates. No passport? Start the application now — it takes 4–6 weeks.</div>
+      </div>
+    </div>
+
+    <div class="check-step" id="step-visa">
+      <div class="step-check" onclick="toggleStep('step-visa')"></div>
+      <div style="flex:1">
+        <div class="step-num-label">Step 2</div>
+        <div class="step-title-main">📋 Sort Your Visa</div>
+        <div class="step-desc-main">Requirements depend on your nationality. Some countries are now visa-free for 15 days. Others need to apply. Click to find yours.</div>
+      </div>
+      <div class="step-action"><button class="step-btn" onclick="openModal('visa-modal')">Check my visa →</button></div>
+    </div>
+
+    <div class="check-step" id="step-flights">
+      <div class="step-check" onclick="toggleStep('step-flights')"></div>
+      <div style="flex:1">
+        <div class="step-num-label">Step 3</div>
+        <div class="step-title-main">✈️ Book Flights &amp; Hotels</div>
+        <div class="step-desc-main">Once your visa is approved, book everything. Use Trip.com for China hotels — not all hotels accept foreigners. International chains are always safe.</div>
+      </div>
+    </div>
+
+    <div class="check-step" id="step-esim">
+      <div class="step-check" onclick="toggleStep('step-esim')"></div>
+      <div style="flex:1">
+        <div class="step-num-label">Step 4</div>
+        <div class="step-title-main">📶 Get a SIM or eSIM</div>
+        <div class="step-desc-main">Many hotels need a Chinese phone number to check in. Get an eSIM on Airalo before you fly, or buy a China Mobile SIM at the airport with your passport.</div>
+      </div>
+      <div class="step-action"><button class="step-btn" onclick="openModal('sim-modal')">SIM guide →</button></div>
+    </div>
+
+    <div class="check-step" id="step-payment">
+      <div class="step-check" onclick="toggleStep('step-payment')"></div>
+      <div style="flex:1">
+        <div class="step-num-label">Step 5</div>
+        <div class="step-title-main">💳 Set Up Payments</div>
+        <div class="step-desc-main">China is almost entirely cashless. Street food stalls, taxis, supermarkets — all QR code. Link your foreign card to Alipay before you land. This is the #1 thing to do.</div>
+      </div>
+      <div class="step-action"><button class="step-btn" onclick="openModal('payment-modal')">How to →</button></div>
+    </div>
+
+    <div class="check-step" id="step-network">
+      <div class="step-check" onclick="toggleStep('step-network')"></div>
+      <div style="flex:1">
+        <div class="step-num-label">Step 6</div>
+        <div class="step-title-main">🌐 Internet &amp; Social Media</div>
+        <div class="step-desc-main">Google, Instagram, WhatsApp are blocked in China. Download a VPN before you fly — you can't download them once you're there.</div>
+      </div>
+      <div class="step-action"><button class="step-btn" onclick="openModal('network-modal')">Learn more →</button></div>
+    </div>
+
+    <div class="check-step" id="step-apps">
+      <div class="step-check" onclick="toggleStep('step-apps')"></div>
+      <div style="flex:1">
+        <div class="step-num-label">Step 7</div>
+        <div class="step-title-main">📱 Download Your Apps</div>
+        <div class="step-desc-main">WeChat, Alipay, Didi, Amap, Dianping, Trip.com. These 6 apps will run your entire trip.</div>
+      </div>
+      <div class="step-action"><button class="step-btn" onclick="openModal('apps-modal')">App list →</button></div>
+    </div>
+
+    <div class="check-step" id="step-transport">
+      <div class="step-check" onclick="toggleStep('step-transport')"></div>
+      <div style="flex:1">
+        <div class="step-num-label">Step 8</div>
+        <div class="step-title-main">🚄 Understand Transport</div>
+        <div class="step-desc-main">China's high-speed rail is the best in the world. Learn how to book trains, use Didi, and navigate the metro system.</div>
+      </div>
+      <div class="step-action"><button class="step-btn" onclick="openModal('transport-modal')">Transport guide →</button></div>
+    </div>
+
+    <div class="check-step" id="step-customs">
+      <div class="step-check" onclick="toggleStep('step-customs')"></div>
+      <div style="flex:1">
+        <div class="step-num-label">Step 9</div>
+        <div class="step-title-main">🛃 Arrival &amp; Immigration</div>
+        <div class="step-desc-main">What to expect at Chinese immigration, health declaration forms, baggage rules, and how to get from the airport to your hotel smoothly.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<footer>
+  <div><div class="footer-brand">Ready? China!</div><div>Survive &amp; Thrive with K · 为朋友们而造</div></div>
+  <div style="text-align:right;line-height:1.8"><div>AI Planner · Community · Coming Soon</div><div style="opacity:.5;margin-top:4px">© 2025 Ready? China!</div></div>
+</footer>
+
+<!-- ══════════ MODALS ══════════ -->
+
+<!-- VISA -->
+<div class="modal-overlay" id="visa-modal">
+  <div class="modal-box"><div class="modal-header"><div><div class="modal-title">📋 Visa Guide · 签证</div><div class="modal-subtitle">Select your nationality to see your exact options</div></div><button class="modal-close" onclick="closeModal('visa-modal')">×</button></div>
+  <div class="modal-body">
+    <input class="nationality-search" id="visa-search" placeholder="Type your country..." oninput="filterCountries()"/>
+    <div class="country-list" id="country-list">
+      <div class="country-btn" onclick="showVisa(this,'us')">🇺🇸 USA</div>
+      <div class="country-btn" onclick="showVisa(this,'uk')">🇬🇧 UK</div>
+      <div class="country-btn" onclick="showVisa(this,'au')">🇦🇺 Australia</div>
+      <div class="country-btn" onclick="showVisa(this,'de')">🇩🇪 Germany</div>
+      <div class="country-btn" onclick="showVisa(this,'fr')">🇫🇷 France</div>
+      <div class="country-btn" onclick="showVisa(this,'ca')">🇨🇦 Canada</div>
+      <div class="country-btn" onclick="showVisa(this,'sg')">🇸🇬 Singapore</div>
+      <div class="country-btn" onclick="showVisa(this,'jp')">🇯🇵 Japan</div>
+      <div class="country-btn" onclick="showVisa(this,'kr')">🇰🇷 South Korea</div>
+      <div class="country-btn" onclick="showVisa(this,'nz')">🇳🇿 New Zealand</div>
+      <div class="country-btn" onclick="showVisa(this,'it')">🇮🇹 Italy</div>
+      <div class="country-btn" onclick="showVisa(this,'es')">🇪🇸 Spain</div>
+      <div class="country-btn" onclick="showVisa(this,'nl')">🇳🇱 Netherlands</div>
+      <div class="country-btn" onclick="showVisa(this,'se')">🇸🇪 Sweden</div>
+      <div class="country-btn" onclick="showVisa(this,'ch')">🇨🇭 Switzerland</div>
+      <div class="country-btn" onclick="showVisa(this,'br')">🇧🇷 Brazil</div>
+      <div class="country-btn" onclick="showVisa(this,'in')">🇮🇳 India</div>
+      <div class="country-btn" onclick="showVisa(this,'za')">🇿🇦 South Africa</div>
+    </div>
+    <div class="visa-result" id="visa-result"></div>
+    <div class="vf-title">🌟 144-Hour Visa-Free Transit — Eligible Countries Include:</div>
+    <div class="vf-grid">
+      <div class="vf-item">🇺🇸 United States</div><div class="vf-item">🇬🇧 United Kingdom</div>
+      <div class="vf-item">🇩🇪 Germany</div><div class="vf-item">🇫🇷 France</div>
+      <div class="vf-item">🇦🇺 Australia</div><div class="vf-item">🇨🇦 Canada</div>
+      <div class="vf-item">🇮🇹 Italy</div><div class="vf-item">🇪🇸 Spain</div>
+      <div class="vf-item">🇯🇵 Japan</div><div class="vf-item">🇰🇷 South Korea</div>
+      <div class="vf-item">🇳🇱 Netherlands</div><div class="vf-item">🇸🇪 Sweden</div>
+    </div>
+    <p style="font-size:11px;color:var(--text-muted);margin-top:10px">Must have onward ticket to a 3rd country. Valid in Beijing, Shanghai, Guangzhou, Chengdu + more.</p>
+  </div></div>
+</div>
+
+<!-- SIM -->
+<div class="modal-overlay" id="sim-modal">
+  <div class="modal-box"><div class="modal-header"><div><div class="modal-title">📶 SIM Card &amp; eSIM · 手机卡</div><div class="modal-subtitle">Stay connected from the moment you land</div></div><button class="modal-close" onclick="closeModal('sim-modal')">×</button></div>
+  <div class="modal-body">
+    <div class="modal-note" style="margin-bottom:16px"><strong>⚠️ Important:</strong> Many Chinese hotels require a local phone number to complete check-in. Getting a SIM is a good option.</div>
+    <div class="info-grid">
+      <div class="info-card"><div class="info-card-title">📲 eSIM (Best Option)</div><ul class="info-list"><li>Buy on Airalo before flying — activates on landing</li><li>Works on any eSIM-compatible phone</li><li>Zero stress on arrival</li></ul></div>
+      <div class="info-card"><div class="info-card-title">🛬 Airport SIM</div><ul class="info-list"><li>China Mobile/Unicom counters at major airports</li><li>Bring your passport — required by law</li><li>¥100–200 for 30–90 day tourist SIM</li></ul></div>
+      <div class="info-card"><div class="info-card-title">📡 Pocket WiFi</div><ul class="info-list"><li>Rent at airport or pre-book online</li><li>Good for sharing with travel companions</li><li>Return at end of trip</li></ul></div>
+    </div>
+    <div class="modal-note" style="margin-top:14px">💡 <strong>K's pick:</strong> eSIM before you fly. China Mobile has the best rural coverage.</div>
+  </div></div>
+</div>
+
+<!-- PAYMENT -->
+<div class="modal-overlay" id="payment-modal">
+  <div class="modal-box"><div class="modal-header"><div><div class="modal-title">💳 Payments in China · 支付</div><div class="modal-subtitle">China is almost entirely cashless — here's how to survive</div></div><button class="modal-close" onclick="closeModal('payment-modal')">×</button></div>
+  <div class="modal-body">
+    <div class="modal-note" style="margin-bottom:16px"><strong>The reality:</strong> Even tiny street food stalls only accept QR code payments. Set this up at home before you fly.</div>
+    <div class="app-list">
+      <div class="app-item"><div class="app-icon-box">💳</div><div><div class="app-name">Alipay 支付宝 — Priority #1</div><div class="app-desc">Now officially supports foreign Visa/Mastercard/Amex. Download, register, link your card. Used everywhere.</div><div class="app-tip">✅ Use the "International" version. Link your card in Settings → Bank Cards.</div></div></div>
+      <div class="app-item"><div class="app-icon-box">💬</div><div><div class="app-name">WeChat Pay 微信支付</div><div class="app-desc">Built into WeChat. Also supports foreign cards. Set it up as a backup while you're setting up WeChat anyway.</div><div class="app-tip">✅ You'll need WeChat — set up the payment while you're at it.</div></div></div>
+      <div class="app-item"><div class="app-icon-box">💵</div><div><div class="app-name">Cash (Backup)</div><div class="app-desc">Bring ¥500–1000 RMB for emergencies. Exchange at Bank of China for best rates.</div><div class="app-tip">⚠️ Notify your home bank before travel to avoid ATM blocks.</div></div></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- NETWORK -->
+<div class="modal-overlay" id="network-modal">
+  <div class="modal-box"><div class="modal-header"><div><div class="modal-title">🌐 Internet &amp; Social Media · 网络</div><div class="modal-subtitle">The Great Firewall — what's blocked and how to stay connected</div></div><button class="modal-close" onclick="closeModal('network-modal')">×</button></div>
+  <div class="modal-body">
+    <div class="modal-note" style="margin-bottom:16px"><strong>Why are apps blocked?</strong> China operates a national internet filter. Google, Instagram, WhatsApp, Facebook, YouTube are all blocked — it's government policy, not a glitch.</div>
+    <div class="app-list">
+      <div class="app-item"><div class="app-icon-box">🚫</div><div><div class="app-name">What doesn't work in China</div><div class="app-desc">Google, Instagram, Facebook, WhatsApp, Twitter/X, Snapchat, Spotify, Netflix, most Western news sites.</div><div class="app-tip">⚠️ Even some hotel WiFis are filtered.</div></div></div>
+      <div class="app-item"><div class="app-icon-box">🔐</div><div><div class="app-name">VPN — The Golden Rule</div><div class="app-desc">Download and TEST your VPN BEFORE flying. You cannot easily download VPN apps once in China. This is the #1 mistake first-timers make.</div><div class="app-tip">💡 K's picks: ExpressVPN (most reliable) + Astrill as backup. Free VPNs almost never work.</div></div></div>
+      <div class="app-item"><div class="app-icon-box">✅</div><div><div class="app-name">What works instead</div><div class="app-desc">WeChat (messaging), Amap (maps), Dianping (food reviews), Weibo (social), Bilibili (video), Baidu (search).</div><div class="app-tip">✅ All Chinese apps work perfectly without a VPN.</div></div></div>
+    </div>
+    <div class="modal-note" style="margin-top:14px">⚖️ VPN use by tourists is a gray area. Millions use them every year without issue. Personal use only.</div>
+  </div></div>
+</div>
+
+<!-- APPS -->
+<div class="modal-overlay" id="apps-modal">
+  <div class="modal-box"><div class="modal-header"><div><div class="modal-title">📱 Essential Apps · 必备APP</div><div class="modal-subtitle">Download these 6 before you fly — they run your entire trip</div></div><button class="modal-close" onclick="closeModal('apps-modal')">×</button></div>
+  <div class="modal-body">
+    <div class="app-list">
+      <div class="app-item"><div class="app-icon-box">💬</div><div><div class="app-name">WeChat 微信 — Everything App</div><div class="app-desc">Messaging, payments, food ordering, maps. Without WeChat, China is very hard.</div><div class="app-tip">✅ Register with your phone number before arrival.</div></div></div>
+      <div class="app-item"><div class="app-icon-box">💳</div><div><div class="app-name">Alipay 支付宝 — Pay for Everything</div><div class="app-desc">China's dominant payment app. Foreign cards accepted. Link your card before you land.</div><div class="app-tip">✅ Link Visa/Mastercard in Settings. Do this BEFORE you arrive.</div></div></div>
+      <div class="app-item"><div class="app-icon-box">🚗</div><div><div class="app-name">Didi 滴滴 — China's Uber</div><div class="app-desc">Works in English. No language barrier. Much cheaper than traditional taxis.</div><div class="app-tip">✅ Set pickup and destination in English — app handles translation.</div></div></div>
+      <div class="app-item"><div class="app-icon-box">🗺️</div><div><div class="app-name">Amap 高德地图 — Navigation</div><div class="app-desc">Google Maps doesn't work well in China. Amap has an English mode and works offline.</div><div class="app-tip">✅ Switch to English in Settings. Download city maps offline.</div></div></div>
+      <div class="app-item"><div class="app-icon-box">🍜</div><div><div class="app-name">大众点评 Dianping — Where to Eat</div><div class="app-desc">China's Yelp + TripAdvisor. Every restaurant rated. Filter for English menus.</div><div class="app-tip">✅ Best way to find hidden local spots tourists miss.</div></div></div>
+      <div class="app-item"><div class="app-icon-box">🚆</div><div><div class="app-name">Trip.com (携程) — Book Everything</div><div class="app-desc">Trains, flights, hotels in one English app. Much easier than 12306 for foreigners.</div><div class="app-tip">✅ Book high-speed rail here — most reliable for foreigners.</div></div></div>
+    </div>
+    <div class="modal-note" style="margin-top:14px">🔤 Also download Google Translate with the Chinese offline pack before flying. Pleco is the best dictionary — point your camera at any text.</div>
+  </div></div>
+</div>
+
+<!-- TRANSPORT -->
+<div class="modal-overlay" id="transport-modal">
+  <div class="modal-box"><div class="modal-header"><div><div class="modal-title">🚄 Getting Around China · 交通</div><div class="modal-subtitle">World's best rail, easy metro, and Didi for taxis</div></div><button class="modal-close" onclick="closeModal('transport-modal')">×</button></div>
+  <div class="modal-body">
+    <div class="info-grid">
+      <div class="info-card"><div class="info-card-title">🚄 High-Speed Rail</div><ul class="info-list"><li>World's best rail system — use it between cities</li><li>Beijing → Shanghai: 4.5 hours</li><li>Book on Trip.com with your passport number</li><li>Bring passport to collect tickets at station</li></ul></div>
+      <div class="info-card"><div class="info-card-title">🚇 Metro</div><ul class="info-list"><li>Every major city has a modern cheap metro</li><li>Machines have English — easy to use</li><li>Scan WeChat/Alipay QR at gates</li><li>¥3–10 per journey</li></ul></div>
+      <div class="info-card"><div class="info-card-title">🚗 Didi (Taxi App)</div><ul class="info-list"><li>Like Uber — no language barrier</li><li>¥20–40 for most city rides</li><li>Also: 曹操出行, 花小猪 (cheaper)</li><li>Never use unlicensed airport taxis!</li></ul></div>
+      <div class="info-card"><div class="info-card-title">✈️ Domestic Flights</div><ul class="info-list"><li>Best for very long distances</li><li>Book on Trip.com — English support</li><li>Arrive 2 hours early</li><li>Budget options: Xiamen Air, Shenzhen Airlines</li></ul></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ABOUT -->
+<div class="modal-overlay" id="about-modal">
+  <div class="modal-box"><div class="modal-header"><div><div class="modal-title">🙋‍♀️ About K · 关于我</div><div class="modal-subtitle">The person behind Ready? China!</div></div><button class="modal-close" onclick="closeModal('about-modal')">×</button></div>
+  <div class="modal-body" style="padding:0"><div class="about-card"><div class="about-top"><div class="about-avatar">🌏</div><div class="about-intro"><div class="about-name">Hey, I'm K!</div><div class="about-role">Local Chinese · World Traveler · Your China Guide</div><div class="about-flags">🇵🇭 🇭🇰 🇨🇳 🇦🇺</div></div></div>
+  <div class="about-body"><div class="about-story">Born in the Philippines, grew up between Hong Kong, Quanzhou China, studied in Australia and traveled around Asian countries. Now I'm back in China inviting friends to visit. Every one of them panics. So I built this — step by step, I've got you.</div>
+  <div class="about-contact"><span>📧</span><span>Email K: <a href="mailto:katherine011004@gmail.com">katherine011004@gmail.com</a></span></div>
+  <div class="about-hometown">家乡：福建泉州 · Hometown: Quanzhou, Fujian 🏮</div></div></div></div>
+</div>
+
+<!-- PLANNING -->
+<div class="modal-overlay" id="planning-modal">
+  <div class="modal-box" style="max-width:540px"><div class="modal-header"><div><div class="modal-title">🤖 AI Trip Planner · 智能行程</div><div class="modal-subtitle">Coming soon</div></div><button class="modal-close" onclick="closeModal('planning-modal')">×</button></div>
+  <div class="modal-body"><div class="planner-teaser"><div class="planner-icon">✨</div><div class="planner-h">Coming Soon</div><div class="planner-p">Tell us your budget, days, season, and interests — complete personalised itinerary generated in seconds.</div>
+  <div class="notify-row"><input class="notify-input" id="plan-email" type="email" placeholder="your@email.com"/><button class="notify-btn" onclick="plannerNotify()">Notify Me</button></div>
+  <div class="notify-ok" id="plan-ok">🎉 You're on the list!</div></div></div></div>
+</div>
+
+<script src="assets/script.js"></script>
+</body>
+</html>

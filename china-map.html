@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>China Map · Ready? China!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.map-wrap{max-width:860px;margin:0 auto;padding:60px 24px}
+.map-hint{text-align:center;font-size:11px;color:var(--gold);letter-spacing:2px;margin-bottom:6px;animation:pulseHint 2.2s ease-in-out infinite}
+@keyframes pulseHint{0%,100%{opacity:.4}50%{opacity:1}}
+#china-map-svg{width:100%;height:auto;display:block;margin-top:12px}
+#china-map-svg .province{fill:var(--province-default);stroke:var(--province-stroke);stroke-width:.8;cursor:pointer;transition:fill .3s,filter .3s}
+#china-map-svg .province:hover{fill:var(--province-hover);filter:drop-shadow(0 0 6px rgba(201,168,76,.5))}
+#china-map-svg .province.active{fill:var(--province-active);filter:drop-shadow(0 0 10px rgba(192,57,43,.6))}
+.plzh{font-size:7px;fill:rgba(26,18,8,.5);font-family:'Noto Serif SC',serif}
+.plen{font-size:5px;fill:rgba(26,18,8,.3);font-family:'Noto Serif SC',serif}
+#map-active-strip{text-align:center;min-height:40px;padding:8px;display:flex;align-items:center;justify-content:center;margin-top:8px}
+.map-pill{display:inline-flex;align-items:center;gap:10px;background:var(--red-soft);border:1px solid var(--red-border);padding:8px 20px;border-radius:20px}
+.map-pill-zh{font-family:'Noto Serif SC',serif;font-size:17px;color:var(--accent)}
+.map-pill-en{font-size:11px;color:var(--gold);letter-spacing:2px;text-transform:uppercase}
+.map-pill-btn{font-size:10px;color:var(--text-muted);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.map-pill-btn:hover{color:var(--accent)}
+/* planner/about modals */
+.planner-teaser{text-align:center;padding:10px 0}
+.planner-icon{font-size:48px;margin-bottom:16px}
+.planner-h{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);margin-bottom:10px}
+.planner-p{font-size:13px;color:var(--text-muted);line-height:1.7;max-width:420px;margin:0 auto 24px}
+.notify-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.notify-input{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:10px 16px;border-radius:6px;font-size:12px;outline:none;width:210px;font-family:'DM Sans',sans-serif}
+.notify-btn{background:var(--accent);color:white;border:none;padding:10px 18px;border-radius:6px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif}
+.notify-ok{font-size:12px;color:var(--gold);margin-top:10px;display:none}
+.about-card{background:white;border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.about-top{background:linear-gradient(135deg,var(--accent) 0%,#8b1a1a 100%);padding:32px;display:flex;align-items:flex-start;gap:20px}
+.about-avatar{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;border:2px solid rgba(255,255,255,.4)}
+.about-intro .about-name{font-family:'Playfair Display',serif;font-size:22px;color:white;margin-bottom:4px}
+.about-intro .about-role{font-size:11px;color:rgba(255,255,255,.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.about-intro .about-flags{font-size:20px;letter-spacing:4px}
+.about-body{padding:28px}
+.about-story{font-size:13px;color:var(--text-mid);line-height:1.8;margin-bottom:20px}
+.about-contact{display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--red-soft);border:1px solid var(--red-border);border-radius:8px;font-size:12px;color:var(--text-mid)}
+.about-contact a{color:var(--accent);font-weight:500}
+.about-hometown{font-family:'Noto Serif SC',serif;font-size:13px;color:var(--accent);margin-top:12px}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo-area">
+    <div class="logo-travelers">
+      <div class="traveler"><svg width="20" height="32" viewBox="0 0 20 32" fill="none"><circle cx="10" cy="4.5" r="3.5" fill="#c0392b" opacity=".85"/><rect x="6" y="9" width="8" height="13" rx="2" fill="#c0392b" opacity=".85"/><rect x="12.5" y="10" width="5" height="7" rx="1.5" fill="#9a7b2f" opacity=".9"/><line x1="7.5" y1="22" x2="5.5" y2="31" stroke="#c0392b" stroke-width="2.5" stroke-linecap="round" opacity=".85"/><line x1="12.5" y1="22" x2="14.5" y2="31" stroke="#c0392b" stroke-width="2.5" stroke-linecap="round" opacity=".85"/></svg></div>
+      <div class="traveler"><svg width="18" height="30" viewBox="0 0 18 30" fill="none"><circle cx="9" cy="4" r="3" fill="#9a7b2f" opacity=".8"/><rect x="5.5" y="8" width="7" height="12" rx="2" fill="#9a7b2f" opacity=".8"/><rect x="11" y="9" width="4.5" height="6.5" rx="1.5" fill="#c0392b" opacity=".7"/><line x1="7" y1="20" x2="5.5" y2="29" stroke="#9a7b2f" stroke-width="2.2" stroke-linecap="round" opacity=".8"/><line x1="11" y1="20" x2="12.5" y2="29" stroke="#9a7b2f" stroke-width="2.2" stroke-linecap="round" opacity=".8"/></svg></div>
+      <div class="traveler"><svg width="16" height="28" viewBox="0 0 16 28" fill="none"><circle cx="8" cy="3.5" r="2.8" fill="#4a3c28" opacity=".6"/><rect x="5" y="7" width="6" height="11" rx="2" fill="#4a3c28" opacity=".6"/><rect x="9.5" y="8" width="4" height="6" rx="1.5" fill="#c0392b" opacity=".55"/><line x1="6.5" y1="18" x2="5" y2="27" stroke="#4a3c28" stroke-width="2" stroke-linecap="round" opacity=".6"/><line x1="9.5" y1="18" x2="11" y2="27" stroke="#4a3c28" stroke-width="2" stroke-linecap="round" opacity=".6"/></svg></div>
+    </div>
+    <div class="logo-text"><div class="logo-main"><a href="index.html" style="text-decoration:none;color:inherit">Ready? China!</a></div><div class="logo-sub">Survive &amp; Thrive with K</div></div>
+  </div>
+  <nav>
+    <a class="nav-link" href="get-ready.html">Get Ready with Me</a>
+    <a class="nav-link" href="cities.html">Cities</a>
+    <a class="nav-link" href="community.html">Community</a>
+    <button class="nav-link nav-cta" onclick="openModal('planning-modal')"><span class="soon-tag">SOON</span>Start Planning</button>
+  </nav>
+</header>
+<button id="menu-btn" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+<div id="menu-dropdown">
+  <div class="menu-item" onclick="window.location='get-ready.html'"><div class="menu-icon">✅</div><div><div class="menu-item-title">Get Ready with Me</div><div class="menu-item-sub">Step-by-step checklist</div></div><span class="mbadge mbadge-red">START</span></div>
+  <div class="menu-item" onclick="window.location='cities.html'"><div class="menu-icon">🗺️</div><div><div class="menu-item-title">Cities</div><div class="menu-item-sub">Where should I go?</div></div></div>
+  <div class="menu-item" onclick="window.location='china-map.html'"><div class="menu-icon">📍</div><div><div class="menu-item-title">Explore the Map</div><div class="menu-item-sub">All 31 provinces</div></div></div>
+  <div class="menu-item" onclick="window.location='community.html'"><div class="menu-icon">👥</div><div><div class="menu-item-title">Community</div><div class="menu-item-sub">Tips from real travelers</div></div><span class="mbadge mbadge-gray">SOON</span></div>
+  <div class="menu-item" onclick="openModal('about-modal');closeMenu()"><div class="menu-icon">🙋‍♀️</div><div><div class="menu-item-title">About K</div><div class="menu-item-sub">Who built this &amp; why</div></div></div>
+  <div class="menu-item" onclick="openModal('planning-modal');closeMenu()"><div class="menu-icon">🤖</div><div><div class="menu-item-title">AI Trip Planner</div></div><span class="mbadge mbadge-gray">SOON</span></div>
+</div>
+<div id="prov-tip"><div class="tzh" id="tip-zh"></div><div class="ten" id="tip-en"></div><div class="tdesc" id="tip-desc"></div></div>
+
+<main>
+<div class="map-wrap">
+  <div class="section-eyebrow" style="text-align:center">Explore · 探索中国</div>
+  <h2 class="section-title" style="text-align:center">Click any province to light it up</h2>
+  <p class="section-sub" style="text-align:center;margin-bottom:0">All 31 provinces — hover for a preview, click to select</p>
+  <div class="map-hint">↓ Click a province ↓</div>
+
+  <svg id="china-map-svg" viewBox="0 0 900 760" xmlns="http://www.w3.org/2000/svg">
+    <g id="heilongjiang" class="province" data-zh="黑龙江" data-en="Heilongjiang" data-desc="China's northernmost province. Ice Festival, Siberian tigers, vast forests." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="600,30 725,28 762,58 742,100 700,122 658,132 628,112 590,80"/></g>
+    <text x="672" y="74"><tspan class="plzh" text-anchor="middle">黑龙江</tspan></text>
+    <text x="672" y="83"><tspan class="plen" text-anchor="middle">Heilongjiang</tspan></text>
+    <g id="jilin" class="province" data-zh="吉林" data-en="Jilin" data-desc="Changchun & Jilin City. Ski resorts, rime ice scenery, Korean culture." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="628,112 700,122 722,152 680,172 638,156 614,136"/></g>
+    <text x="665" y="145"><tspan class="plzh" text-anchor="middle">吉林 Jilin</tspan></text>
+    <g id="liaoning" class="province" data-zh="辽宁" data-en="Liaoning" data-desc="Dalian's coastline, Shenyang Imperial Palace. Gateway to Northeast." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="614,136 638,156 680,172 692,202 650,218 614,202 594,176 600,156"/></g>
+    <text x="638" y="186"><tspan class="plzh" text-anchor="middle">辽宁 Liaoning</tspan></text>
+    <g id="inner-mongolia" class="province" data-zh="内蒙古" data-en="Inner Mongolia" data-desc="Vast steppes, nomadic culture, horse riding, incredible starry skies." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="278,62 600,30 590,80 628,112 614,136 594,176 558,172 498,162 438,152 378,157 328,142 288,122 258,92"/></g>
+    <text x="438" y="112"><tspan class="plzh" text-anchor="middle">内蒙古</tspan></text>
+    <text x="438" y="122"><tspan class="plen" text-anchor="middle">Inner Mongolia</tspan></text>
+    <g id="beijing" class="province" data-zh="北京" data-en="Beijing" data-desc="China's capital. Great Wall, Forbidden City, Tiananmen. Essential first stop." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="548,172 570,162 584,177 580,194 559,197 543,187"/></g>
+    <text x="562" y="184"><tspan class="plzh" text-anchor="middle">京</tspan></text>
+    <g id="tianjin" class="province" data-zh="天津" data-en="Tianjin" data-desc="Historic port city near Beijing. European architecture, famous Goubuli buns." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="568,192 584,186 596,202 580,212 564,207"/></g>
+    <text x="580" y="203"><tspan class="plzh" text-anchor="middle">津</tspan></text>
+    <g id="hebei" class="province" data-zh="河北" data-en="Hebei" data-desc="Surrounds Beijing. Chengde Summer Palace, Zhangjiakou ski mountains." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="498,162 548,172 543,187 559,197 580,212 564,242 528,258 488,252 458,232 448,202 468,177"/></g>
+    <text x="508" y="218"><tspan class="plzh" text-anchor="middle">河北 Hebei</tspan></text>
+    <g id="shanxi" class="province" data-zh="山西" data-en="Shanxi" data-desc="Ancient culture. Pingyao old city (UNESCO), Yungang Grottoes." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="448,202 488,252 478,287 453,302 428,287 418,257 428,227"/></g>
+    <text x="450" y="255"><tspan class="plzh" text-anchor="middle">山西 Shanxi</tspan></text>
+    <g id="shandong" class="province" data-zh="山东" data-en="Shandong" data-desc="Birthplace of Confucius. Mount Tai, Qingdao beer, beautiful coastline." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="564,242 618,237 632,257 622,282 590,297 558,287 538,267 528,258"/></g>
+    <text x="582" y="264"><tspan class="plzh" text-anchor="middle">山东 Shandong</tspan></text>
+    <g id="henan" class="province" data-zh="河南" data-en="Henan" data-desc="Heart of ancient China. Shaolin Temple, Longmen Grottoes, Yellow River." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="478,287 528,258 558,287 553,322 518,342 483,332 463,312"/></g>
+    <text x="508" y="307"><tspan class="plzh" text-anchor="middle">河南 Henan</tspan></text>
+    <g id="shaanxi" class="province" data-zh="陕西" data-en="Shaanxi" data-desc="Terracotta Army, ancient Xi'an. The Silk Road begins here!" onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="378,157 438,152 448,202 428,227 418,257 428,287 408,312 378,322 358,302 353,267 363,232 368,197"/></g>
+    <text x="394" y="245"><tspan class="plzh" text-anchor="middle">陕西 Shaanxi</tspan></text>
+    <g id="gansu" class="province" data-zh="甘肃" data-en="Gansu" data-desc="Silk Road corridor. Dunhuang Mogao Caves, Rainbow Mountains." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="198,142 278,62 288,122 328,142 378,157 368,197 353,267 328,292 298,282 268,262 238,232 198,202 188,172"/></g>
+    <text x="272" y="195"><tspan class="plzh" text-anchor="middle">甘肃 Gansu</tspan></text>
+    <g id="ningxia" class="province" data-zh="宁夏" data-en="Ningxia" data-desc="Desert meets oasis. Shapotou sand dunes, Hui Muslim culture." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="353,267 363,232 368,197 383,202 388,232 383,262 366,277"/></g>
+    <text x="372" y="242"><tspan class="plzh" text-anchor="middle">宁夏</tspan></text>
+    <g id="qinghai" class="province" data-zh="青海" data-en="Qinghai" data-desc="Qinghai Lake, Tibetan plateau, breathtaking high-altitude scenery." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="148,252 198,202 238,232 268,262 298,282 308,322 278,362 238,372 198,362 168,332 143,297"/></g>
+    <text x="224" y="298"><tspan class="plzh" text-anchor="middle">青海 Qinghai</tspan></text>
+    <g id="xinjiang" class="province" data-zh="新疆" data-en="Xinjiang" data-desc="China's largest region. Taklamakan Desert, Silk Road oases, Kashgar." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="28,82 198,82 198,142 188,172 198,202 148,252 143,297 98,312 58,292 28,252 18,182 22,122"/></g>
+    <text x="108" y="188"><tspan class="plzh" text-anchor="middle">新疆 Xinjiang</tspan></text>
+    <g id="tibet" class="province" data-zh="西藏" data-en="Tibet" data-desc="Potala Palace, Mt. Everest Base Camp. Roof of the world." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="98,312 143,297 148,252 198,362 238,372 258,412 218,442 168,452 128,432 93,402 78,362 83,332"/></g>
+    <text x="154" y="388"><tspan class="plzh" text-anchor="middle">西藏 Tibet</tspan></text>
+    <g id="sichuan" class="province" data-zh="四川" data-en="Sichuan" data-desc="Panda paradise! Spicy food, Jiuzhaigou lakes, Leshan Giant Buddha." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="298,282 328,292 353,267 366,277 383,262 388,312 378,352 353,382 318,392 288,372 268,342 258,312 268,292"/></g>
+    <text x="322" y="334"><tspan class="plzh" text-anchor="middle">四川 Sichuan</tspan></text>
+    <g id="chongqing" class="province" data-zh="重庆" data-en="Chongqing" data-desc="Mountain megacity on the Yangtze. Hotpot capital, cyberpunk skyline." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="388,312 408,312 418,332 413,357 393,362 378,352"/></g>
+    <text x="397" y="337"><tspan class="plzh" text-anchor="middle">渝</tspan></text>
+    <g id="guizhou" class="province" data-zh="贵州" data-en="Guizhou" data-desc="Hidden waterfalls, Huangguoshu Falls, Miao & Dong ethnic culture." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="413,357 428,347 453,357 468,377 458,402 433,417 408,402 398,382"/></g>
+    <text x="434" y="385"><tspan class="plzh" text-anchor="middle">贵州 Guizhou</tspan></text>
+    <g id="yunnan" class="province" data-zh="云南" data-en="Yunnan" data-desc="Lijiang, Shangri-La, rice terraces, 25 ethnic groups. Backpacker paradise." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="258,412 288,372 318,392 353,382 378,402 393,422 383,457 353,472 308,482 278,462 258,442"/></g>
+    <text x="313" y="432"><tspan class="plzh" text-anchor="middle">云南 Yunnan</tspan></text>
+    <g id="guangxi" class="province" data-zh="广西" data-en="Guangxi" data-desc="Guilin's karst mountains & Li River cruise. Zhuang ethnic culture." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="458,402 478,382 508,377 533,392 543,422 523,447 488,457 458,447 443,427"/></g>
+    <text x="493" y="420"><tspan class="plzh" text-anchor="middle">广西 Guangxi</tspan></text>
+    <g id="guangdong" class="province" data-zh="广东" data-en="Guangdong" data-desc="Shenzhen tech hub, Cantonese cuisine, Pearl River Delta, dim sum." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="533,392 568,377 598,382 613,407 603,432 573,447 543,452 523,447"/></g>
+    <text x="565" y="414"><tspan class="plzh" text-anchor="middle">广东 Guangdong</tspan></text>
+    <g id="hainan" class="province" data-zh="海南" data-en="Hainan" data-desc="China's tropical paradise. Sanya beaches, palm trees, duty-free shopping." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="528,492 558,482 578,497 568,517 543,522 523,510"/></g>
+    <text x="550" y="504"><tspan class="plzh" text-anchor="middle">海南 Hainan</tspan></text>
+    <g id="hunan" class="province" data-zh="湖南" data-en="Hunan" data-desc="Avatar Mountains (Zhangjiajie), Mao's birthplace, fiercely spicy cuisine." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="478,332 518,342 543,357 543,392 508,377 478,382 458,402 433,417 428,392 438,367 453,357 463,342"/></g>
+    <text x="487" y="372"><tspan class="plzh" text-anchor="middle">湖南 Hunan</tspan></text>
+    <g id="hubei" class="province" data-zh="湖北" data-en="Hubei" data-desc="Three Gorges Dam, Wuhan, Yangtze River heartland." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="453,312 483,297 518,302 538,317 543,357 518,342 478,332 463,342 453,330"/></g>
+    <text x="495" y="325"><tspan class="plzh" text-anchor="middle">湖北 Hubei</tspan></text>
+    <g id="jiangsu" class="province" data-zh="江苏" data-en="Jiangsu" data-desc="Suzhou gardens, Nanjing history, water towns — China's Venice." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="558,287 588,297 618,302 618,327 593,342 568,347 553,322"/></g>
+    <text x="585" y="318"><tspan class="plzh" text-anchor="middle">江苏 Jiangsu</tspan></text>
+    <g id="shanghai" class="province" data-zh="上海" data-en="Shanghai" data-desc="China's global metropolis. Iconic Bund, world-class dining, fashion." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="608,322 626,320 630,332 620,342 607,337"/></g>
+    <text x="618" y="331"><tspan class="plzh" text-anchor="middle">沪</tspan></text>
+    <g id="zhejiang" class="province" data-zh="浙江" data-en="Zhejiang" data-desc="Hangzhou West Lake, tea culture, water towns. Alibaba's home." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="593,342 623,332 638,347 633,372 608,382 588,372 583,352"/></g>
+    <text x="610" y="360"><tspan class="plzh" text-anchor="middle">浙江 Zhejiang</tspan></text>
+    <g id="fujian" class="province" data-zh="福建" data-en="Fujian" data-desc="Tea country, Tulou buildings, Quanzhou Silk Road. K's hometown!" onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="608,382 633,372 658,377 663,402 643,422 613,417 598,402"/></g>
+    <text x="630" y="398"><tspan class="plzh" text-anchor="middle">福建 Fujian</tspan></text>
+    <g id="jiangxi" class="province" data-zh="江西" data-en="Jiangxi" data-desc="Jingdezhen porcelain, Lushan Mountain, Wuyuan golden fields." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="568,347 593,342 583,352 588,372 608,382 598,402 573,412 553,397 543,372 548,352"/></g>
+    <text x="572" y="378"><tspan class="plzh" text-anchor="middle">江西 Jiangxi</tspan></text>
+    <g id="anhui" class="province" data-zh="安徽" data-en="Anhui" data-desc="Yellow Mountain (Huangshan) — the most photographed peak in China." onmousemove="showTip(event,this)" onmouseleave="hideTip()" onclick="selectProv(this)"><polygon points="538,297 558,287 553,322 568,347 548,352 528,342 518,322 523,302"/></g>
+    <text x="540" y="322"><tspan class="plzh" text-anchor="middle">安徽 Anhui</tspan></text>
+    <ellipse cx="670" cy="432" rx="14" ry="22" fill="var(--province-default)" stroke="var(--province-stroke)" stroke-width=".8" opacity=".6"/>
+    <text x="670" y="435"><tspan class="plzh" text-anchor="middle" font-size="5.5">台湾</tspan></text>
+    <rect x="638" y="488" width="54" height="64" fill="none" stroke="var(--province-stroke)" stroke-width=".5" stroke-dasharray="3,3" rx="2" opacity=".4"/>
+    <text x="665" y="524" fill="var(--text-muted)" font-size="5" text-anchor="middle" pointer-events="none" opacity=".5">南海诸岛</text>
+  </svg>
+
+  <div id="map-active-strip">
+    <div id="map-pill" class="map-pill" style="display:none">
+      <span class="map-pill-zh" id="map-zh"></span>
+      <span class="map-pill-en" id="map-en"></span>
+      <a class="map-pill-btn" href="cities.html">→ See city guide</a>
+    </div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div><div class="footer-brand">Ready? China!</div><div>Survive &amp; Thrive with K · 为朋友们而造</div></div>
+  <div style="text-align:right;line-height:1.8"><div>AI Planner · Community · Coming Soon</div><div style="opacity:.5;margin-top:4px">© 2025 Ready? China!</div></div>
+</footer>
+
+<div class="modal-overlay" id="about-modal">
+  <div class="modal-box"><div class="modal-header"><div><div class="modal-title">🙋‍♀️ About K</div><div class="modal-subtitle">The person behind Ready? China!</div></div><button class="modal-close" onclick="closeModal('about-modal')">×</button></div>
+  <div class="modal-body" style="padding:0"><div class="about-card"><div class="about-top"><div class="about-avatar">🌏</div><div class="about-intro"><div class="about-name">Hey, I'm K!</div><div class="about-role">Local Chinese · World Traveler · Your China Guide</div><div class="about-flags">🇵🇭 🇭🇰 🇨🇳 🇦🇺</div></div></div>
+  <div class="about-body"><div class="about-story">Born in the Philippines, grew up between Hong Kong, Quanzhou China, and studied in Australia. Now I'm back in China — built this so my friends could visit without panicking.</div>
+  <div class="about-contact"><span>📧</span><span>Email K: <a href="mailto:katherine011004@gmail.com">katherine011004@gmail.com</a></span></div>
+  <div class="about-hometown">家乡：福建泉州 · Hometown: Quanzhou, Fujian 🏮</div></div></div></div></div>
+</div>
+<div class="modal-overlay" id="planning-modal">
+  <div class="modal-box" style="max-width:540px"><div class="modal-header"><div><div class="modal-title">🤖 AI Trip Planner</div><div class="modal-subtitle">Coming soon</div></div><button class="modal-close" onclick="closeModal('planning-modal')">×</button></div>
+  <div class="modal-body"><div class="planner-teaser"><div class="planner-icon">✨</div><div class="planner-h">Coming Soon</div><div class="planner-p">Tell us your budget, days, season, and interests — complete personalised itinerary in seconds.</div>
+  <div class="notify-row"><input class="notify-input" id="plan-email" type="email" placeholder="your@email.com"/><button class="notify-btn" onclick="plannerNotify()">Notify Me</button></div>
+  <div class="notify-ok" id="plan-ok">🎉 You're on the list!</div></div></div></div>
+</div>
+
+<script src="assets/script.js"></script>
+</body>
+</html>
