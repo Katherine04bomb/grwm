@@ -147,11 +147,16 @@
       <div class="comm-icon">🏮</div>
       <div class="comm-title">Full community coming soon</div>
       <div class="comm-sub">A space where travelers share real tips, ask questions, and connect. K will be here answering everything personally.</div>
-      <div class="comm-notify">
-        <input class="comm-input" id="comm-email" type="email" placeholder="your@email.com"/>
-        <button class="comm-btn" onclick="communityNotify()">Notify Me</button>
-      </div>
-      <div class="comm-success" id="comm-success">✅ You're on the list! K will be in touch.</div>
+      <form action="https://formspree.io/f/mnjypvzn" method="POST"
+  style="display:flex;flex-direction:column;align-items:center;gap:12px">
+  <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+    <input class="comm-input" type="email" name="email" placeholder="your@email.com" required/>
+    <button class="comm-btn" type="submit">Notify Me</button>
+  </div>
+  <p style="font-size:11px;color:var(--text-muted)">
+    K will email you personally when community launches 🏮
+  </p>
+</form>
       <div class="comm-email-direct">Or reach K directly: <a href="mailto:katherine011004@gmail.com">katherine011004@gmail.com</a></div>
     </div>
   </div>
@@ -159,7 +164,7 @@
 
 <footer>
   <div><div class="footer-brand">Ready? China!</div><div>Survive &amp; Thrive with K · 为朋友们而造</div></div>
-  <div style="text-align:right;line-height:1.8"><div>AI Planner · Community · Coming Soon</div><div style="opacity:.5;margin-top:4px">© 2025 Ready? China!</div></div>
+  <div style="text-align:right;line-height:1.8"><div>AI Planner · Community · Coming Soon</div><div style="opacity:.5;margin-top:4px">© 2026 Ready? China!</div></div>
 </footer>
 
 <div class="modal-overlay" id="about-modal">
