@@ -103,6 +103,11 @@ main{padding-top:70px;position:relative;z-index:1}
 .check-step.done{background:rgba(39,174,96,0.04);border-color:rgba(39,174,96,0.3)}
 .check-step.done .step-check{background:#27ae60;border-color:#27ae60}
 .check-step.done .step-check::after{content:'✓';color:white;font-size:14px;font-weight:700}
+.emergency-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.emergency-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px}
+.emg-num{font-family:'Playfair Display',serif;font-size:22px;color:var(--accent);margin-bottom:4px}
+.emg-title{font-size:12px;font-weight:600;color:var(--text-mid);margin-bottom:6px}
+.emg-desc{font-size:11px;color:var(--text-muted);line-height:1.5}
 .step-check{width:32px;height:32px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;margin-top:2px}
 .step-check:hover{border-color:var(--accent)}
 .step-num-label{font-size:10px;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
@@ -852,7 +857,7 @@ function selectProv(el){
 
 // ── CHECKLIST ──
 const steps=['step-passport','step-visa','step-flights','step-esim','step-payment','step-network','step-apps','step-transport','step-emergency','step-customs'];
-const statusMsgs=['Just getting started — your adventure awaits! 🌱','Great start! Passport sorted ✅','Visa sorted — you\'re officially going! 🎉','Flights & hotel booked — it\'s real now! 🛫','SIM ready — you\'ll have signal the moment you land 📶','Payments sorted — you can eat ANYTHING 🍜','Connected — Instagram works in China too 🌐','Apps ready — you\'re basically a local 📱','Transport sorted — rail, metro, Didi — you\'ve got this 🚄','save the number, I have backup now!','100% CHINA READY! See you there! 🇨🇳🎊'];
+const statusMsgs=['Just getting started — your adventure awaits! 🌱','Great start! Passport sorted ✅','Visa sorted — you\'re officially going! 🎉','Flights & hotel booked — it\'s real now! 🛫','SIM ready — you\'ll have signal the moment you land 📶','Payments sorted — you can eat ANYTHING 🍜','Connected — Instagram works in China too 🌐','Apps ready — you\'re basically a local 📱','Transport sorted — rail, metro, Didi — you\'ve got this 🚄','Emergency number saved - hope you feel safe! 🛃','100% CHINA READY! See you there! 🇨🇳🎊'];
 function toggleStep(id){
   const el=document.getElementById(id);
   el.classList.toggle('done');
