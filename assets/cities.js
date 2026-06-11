@@ -51,7 +51,7 @@ async function loadCities() {
   if (!container) return;
 
   try {
-    const response = await fetch('data/cities.json');
+    const response = await fetch('./data/cities.json');
 
     if (!response.ok) {
       throw new Error(`Could not load cities.json (status ${response.status})`);
