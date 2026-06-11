@@ -341,17 +341,17 @@ footer{border-top:1px solid var(--border);padding:28px 32px;display:flex;align-i
   </div>
   <div class="menu-item" onclick="scrollToSection('community-section');closeMenu()">
     <div class="menu-icon">👥</div>
-    <div><div class="menu-item-title">Community</div><div class="menu-item-sub">Tips from real travelers</div></div>
+    <div><div class="menu-item-title">Community</div><div class="menu-item-sub">Tips from Kat and travelers</div></div>
     <span class="mbadge mbadge-gray">SOON</span>
-  </div>
-  <div class="menu-item" onclick="openModal('about-modal');closeMenu()">
-    <div class="menu-icon">🙋‍♀️</div>
-    <div><div class="menu-item-title">About Katherine</div><div class="menu-item-sub">Who built this & why</div></div>
   </div>
   <div class="menu-item" onclick="openModal('planning-modal');closeMenu()">
     <div class="menu-icon">🤖</div>
     <div><div class="menu-item-title">AI Trip Planner</div><div class="menu-item-sub">Auto itinerary</div></div>
     <span class="mbadge mbadge-gray">SOON</span>
+  </div>
+  <div class="menu-item" onclick="openModal('about-modal');closeMenu()">
+    <div class="menu-icon">🙋‍♀️</div>
+    <div><div class="menu-item-title">About Katherine</div><div class="menu-item-sub">Who built this & why</div></div>
   </div>
 </div>
 
@@ -475,10 +475,20 @@ footer{border-top:1px solid var(--border);padding:28px 32px;display:flex;align-i
       <div class="step-action"><button class="step-btn" onclick="openModal('transport-modal')">Transport guide →</button></div>
     </div>
 
+    <div class="check-step" id="step-emergency">
+      <div class="step-check" onclick="toggleStep('step-emergency')"></div>
+      <div style="flex:1">
+        <div class="step-num-label">Step 9</div>
+        <div class="step-title-main">🆘 Emergency Numbers</div>
+        <div class="step-desc-main">Screenshot or save the key Chinese emergency numbers. Better to have them and not need them.</div>
+      </div>
+      <div class="step-action"><button class="step-btn" onclick="openModal('emergency-modal')">View numbers →</button></div>
+    </div>
+    
     <div class="check-step" id="step-customs">
       <div class="step-check" onclick="toggleStep('step-customs')"></div>
       <div style="flex:1">
-        <div class="step-num-label">Step 9</div>
+        <div class="step-num-label">Step 10</div>
         <div class="step-title-main">🛃 Arrival & Immigration</div>
         <div class="step-desc-main">What to expect at Chinese immigration, health declaration forms, baggage rules, and how to get from the airport to your hotel smoothly.</div>
       </div>
@@ -493,7 +503,7 @@ footer{border-top:1px solid var(--border);padding:28px 32px;display:flex;align-i
 <section class="section" id="cities-section">
   <div class="section-eyebrow">Where to Go · 城市推荐</div>
   <h2 class="section-title">As a first-timer, where should I go?</h2>
-  <p class="section-sub">Don't just follow the crowd. Here's an honest guide — best for what, how long to stay, and how hard it is to navigate as a foreigner.</p>
+  <p class="section-sub">Don't just follow the crowd. Here's an honest guide — best for what, how long to stay, and how hard it is to navigate as a foreigner. Click any city for Top 10 spots.</p>
 
      <div class="city-grid" id="cities-container"></div>
 </section>
@@ -621,29 +631,8 @@ footer{border-top:1px solid var(--border);padding:28px 32px;display:flex;align-i
 </section>
 
 <hr class="section-divider">
-
-<!-- ═══════════ COMMUNITY ═══════════ -->
-<section class="section" id="community-section">
-  <div class="section-eyebrow">Community · 旅行者社区</div>
-  <h2 class="section-title">Real tips from real travelers</h2>
-  <p class="section-sub">A space for foreigners who've been to China to share honest advice — and for Katherine to post real China updates, news, and local tips.</p>
-  <div class="community-coming">
-    <div class="comm-icon">🏮</div>
-    <div class="comm-title">Community is on its way!</div>
-    <div class="comm-sub">I will be posting regular updates: what's new in China, seasonal travel tips, visa policy changes, and real stories from travelers like you. Leave your email to be first in.</div>
-     <form action="https://formspree.io/f/mnjypvzn" method="POST"
-  style="display:flex;flex-direction:column;align-items:center;gap:12px">
-  <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
-    <input class="comm-input" type="email" name="email" placeholder="your@email.com" required/>
-    <button class="comm-btn" type="submit">Notify Me</button>
-  </div>
-  <p style="font-size:11px;color:var(--text-muted)">
-     Katherine will email you personally when community launches 🏮
-  </p>
-</form>
-    <div style="margin-top:20px;font-size:12px;color:var(--text-muted)">Or reach Katherine directly: <a href="mailto:katherine011004@gmail.com" style="color:var(--accent)">katherine011004@gmail.com</a></div>
-  </div>
-</section>
+<!-- ═══════════ community ═══════════ -->
+<div id="community-container"></div>
 
 </main>
 
@@ -771,9 +760,10 @@ footer{border-top:1px solid var(--border);padding:28px 32px;display:flex;align-i
     <div class="modal-body">
       <div class="app-list">
         <div class="app-item"><div class="app-icon-box">💬</div><div><div class="app-name">WeChat 微信 — Everything App</div><div class="app-desc">Messaging, payments, mini-programs, food ordering, maps. Without WeChat, China is very hard. Set it up before arrival and link a payment method.</div><div class="app-tip">✅ Register with your phone number. Add your Chinese friends so they can show you around.</div></div></div>
-        <div class="app-item"><div class="app-icon-box">💳</div><div><div class="app-name">Alipay 支付宝 — Pay for Everything</div><div class="app-desc">China's dominant payment platform. Foreign cards now accepted. Street food, taxis, supermarkets — all QR code.</div><div class="app-tip">✅ Link your Visa/Mastercard in Settings. Do this BEFORE you arrive.</div></div></div>
-        <div class="app-item"><div class="app-icon-box">🚗</div><div><div class="app-name">Didi 滴滴 — China's Uber</div><div class="app-desc">Works in English. No language barrier. Much cheaper than taxis. The driver comes to you — no hailing required.</div><div class="app-tip">✅ Set your pickup and destination in English, the app handles the translation.</div></div></div>
-        <div class="app-item"><div class="app-icon-box">🗺️</div><div><div class="app-name">Amap 高德地图 — Navigation</div><div class="app-desc">Google Maps doesn't work well in China. Amap (Gaode) is the most accurate map — it has an English mode and works offline.</div><div class="app-tip">✅ Switch to English in Settings. Download your city maps offline before exploring.</div></div></div>
+        <div class="app-item"><div class="app-icon-box">💳</div><div><div class="app-name">Alipay 支付宝 — Pay for Everything</div><div class="app-desc">China's dominant payment platform. Foreign cards now accepted. Street food, taxis, supermarkets — all QR code.</div><div class="app-tip">✅ Link your Visa/Mastercard in Settings. Do this BEFORE you arrive.</div> <!-- ✏️ <a href="https://youtube.com/YOUR_VIDEO_ID" target="_blank" class="yt-link">▶ Watch: How to set up Alipay as a foreigner</a> --> </div></div>
+        <div class="app-item"><div class="app-icon-box">🚗</div><div><div class="app-name">Didi 滴滴 — China's Uber</div><div class="app-desc">Works in English. No language barrier. Much cheaper than taxis. The driver comes to you — no hailing required.</div><div class="app-tip">✅ Set your pickup and destination in English, the app handles the translation.</div> <!-- ✏️ When you have a YouTube tutorial ready, replace the comment below with:
+      <a href="https://youtube.com/YOUR_VIDEO_ID" target="_blank" class="yt-link">▶ Watch Kat's Didi tutorial</a> --></div></div>
+        <div class="app-item"><div class="app-icon-box">🗺️</div><div><div class="app-name">Amap 高德地图 — Navigation</div><div class="app-desc">Google Maps doesn't work well in China. Amap (Gaode) is the most accurate map, it has an English mode and works offline. </div><div class="app-tip">✅ Switch to English in Settings. Download your city maps offline before exploring.</div></div></div>
         <div class="app-item"><div class="app-icon-box">🍜</div><div><div class="app-name">大众点评 Dianping — Where to Eat</div><div class="app-desc">China's version of Yelp + TripAdvisor. Every restaurant, café, and attraction rated and reviewed. Filter by "foreigner-friendly" or "English menu".</div><div class="app-tip">✅ Use it to find the best local spots tourists never discover.</div></div></div>
         <div class="app-item"><div class="app-icon-box">🚆</div><div><div class="app-name">Trip.com (携程) — Book Everything</div><div class="app-desc">Trains, flights, hotels all in one English-language app. Much easier than the official 12306 rail app for foreigners. Supports foreign payment cards.</div><div class="app-tip">✅ Book high-speed rail here — it's the most reliable way as a foreigner.</div></div></div>
       </div>
@@ -800,38 +790,27 @@ footer{border-top:1px solid var(--border);padding:28px 32px;display:flex;align-i
   </div>
 </div>
 
+<!-- EMERGENCY -->
+<div class="modal-overlay" id="emergency-modal">
+  <div class="modal-box"><div class="modal-header"><div><div class="modal-title">🆘 Emergency Numbers · 紧急电话</div><div class="modal-subtitle">Screenshot this and save it before you travel</div></div><button class="modal-close" onclick="closeModal('emergency-modal')">×</button></div>
+  <div class="modal-body">
+    <div class="modal-note" style="margin-bottom:16px">📱 Save these in your phone contacts before you land. If you have a Chinese number but struggle with Mandarin, you can send an emergency SMS to <strong>12110</strong> (police).</div>
+    <div class="emergency-grid">
+      <div class="emergency-card"><div class="emg-num">👮 110</div><div class="emg-title">Police</div><div class="emg-desc">Theft, physical attack, or any situation threatening personal safety. Available 24/7. Can also SMS 12110 if you struggle with Mandarin.</div></div>
+      <div class="emergency-card"><div class="emg-num">🚑 120</div><div class="emg-title">Ambulance</div><div class="emg-desc">State your condition and exact location clearly. A single ambulance trip can cost $20–55 USD — travel insurance is strongly recommended!</div></div>
+      <div class="emergency-card"><div class="emg-num">🔥 119</div><div class="emg-title">Fire</div><div class="emg-desc">Dial immediately in case of fire. Stay calm and provide your exact address for a quick response.</div></div>
+      <div class="emergency-card"><div class="emg-num">🚗 122</div><div class="emg-title">Traffic Accident</div><div class="emg-desc">Call 122 for collisions on city roads. Dial 12122 for accidents on expressways or highways.</div></div>
+      <div class="emergency-card"><div class="emg-num">🌍 12308</div><div class="emg-title">Foreign Affairs</div><div class="emg-desc">For foreigners: lost passport, detention, or any serious situation requiring consular support from the Ministry of Foreign Affairs.</div></div>
+      <div class="emergency-card"><div class="emg-num">📋 12367</div><div class="emg-title">Visa &amp; Immigration</div><div class="emg-desc">Visa issues, entry/exit policy questions, residency permits, or immigration matters.</div></div>
+    </div>
+    <div class="modal-note" style="margin-top:14px">🏥 <strong>International hospitals</strong> with English-speaking staff exist in Beijing, Shanghai, Chengdu and major cities. Kat strongly recommends purchasing travel insurance that covers medical evacuation.</div>
+  </div></div>
+</div>
 <div id="about-container"></div>
 
 
 <!-- ═══════════ MODAL: PLANNING ═══════════ -->
-<div class="modal-overlay" id="planning-modal">
-  <div class="modal-box" style="max-width:540px">
-    <div class="modal-header">
-      <div><div class="modal-title">🤖 AI Trip Planner · 智能行程</div><div class="modal-subtitle">Your perfect China itinerary, generated in seconds</div></div>
-      <button class="modal-close" onclick="closeModal('planning-modal')">×</button>
-    </div>
-    <div class="modal-body">
-      <div class="planner-teaser">
-        <div class="planner-icon">✨</div>
-        <div class="planner-h">Coming Soon — Your dream China trip, planned by AI</div>
-        <div class="planner-p">Tell me your budget, how many days, the season you're visiting, and what you love — and I'll generate a complete personalized itinerary with routes, food spots, and local gems.</div>
-        <div class="feature-list">
-          <div class="feat-item"><span class="feat-icon">🗓️</span>Choose your days & season</div>
-          <div class="feat-item"><span class="feat-icon">💸</span>Budget, mid-range or luxury versions</div>
-          <div class="feat-item"><span class="feat-icon">❤️</span>Pick your interests: food · history · nature · nightlife</div>
-          <div class="feat-item"><span class="feat-icon">🚄</span>Optimized routes between cities</div>
-          <div class="feat-item"><span class="feat-icon">📥</span>Export & share with your travel group</div>
-        </div>
-        <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px">Be first to know when it launches 👇</p>
-        <div class="notify-row">
-          <input class="notify-input" id="plan-email" type="email" placeholder="your@email.com"/>
-          <button class="notify-btn" onclick="plannerNotify()">Notify Me</button>
-        </div>
-        <div class="notify-ok" id="plan-ok">🎉 Amazing! You're on the list.</div>
-      </div>
-    </div>
-  </div>
-</div>
+<div id="planner-container"></div>
 
 <script>
 // ── MENU ──
@@ -872,8 +851,8 @@ function selectProv(el){
 }
 
 // ── CHECKLIST ──
-const steps=['step-passport','step-visa','step-flights','step-esim','step-payment','step-network','step-apps','step-transport','step-customs'];
-const statusMsgs=['Just getting started — your adventure awaits! 🌱','Great start! Passport sorted ✅','Visa sorted — you\'re officially going! 🎉','Flights & hotel booked — it\'s real now! 🛫','SIM ready — you\'ll have signal the moment you land 📶','Payments sorted — you can eat ANYTHING 🍜','Connected — Instagram works in China too 🌐','Apps ready — you\'re basically a local 📱','Transport sorted — rail, metro, Didi — you\'ve got this 🚄','100% CHINA READY! See you there! 🇨🇳🎊'];
+const steps=['step-passport','step-visa','step-flights','step-esim','step-payment','step-network','step-apps','step-transport','step-emergency','step-customs'];
+const statusMsgs=['Just getting started — your adventure awaits! 🌱','Great start! Passport sorted ✅','Visa sorted — you\'re officially going! 🎉','Flights & hotel booked — it\'s real now! 🛫','SIM ready — you\'ll have signal the moment you land 📶','Payments sorted — you can eat ANYTHING 🍜','Connected — Instagram works in China too 🌐','Apps ready — you\'re basically a local 📱','Transport sorted — rail, metro, Didi — you\'ve got this 🚄','save the number, I have backup now!','100% CHINA READY! See you there! 🇨🇳🎊'];
 function toggleStep(id){
   const el=document.getElementById(id);
   el.classList.toggle('done');
@@ -956,5 +935,7 @@ function plannerNotify(){
 </script>
 <script src="assets/cities.js"></script>
 <script src="assets/about.js"></script>
+<script src="assets/community.js"></script>
+<script src="assets/aiplanner.js"></script>
 </body>
 </html>

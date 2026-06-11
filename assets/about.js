@@ -71,7 +71,7 @@ function loadAbout() {
             <div class="about-contact">
               <span>📧</span>
               <span>Questions? Stories? Just want to say hi? Email Katherine directly:
-                <a href="mailto:katherine011004@gmail.com">katherine011004@gmail.com</a>
+                <a href="mailto:katherine011004@gmail.com">katherine0⃣️1⃣️1004@gmail.com</a>
               </span>
             </div>
             <div class="about-hometown">Welcome to China! 🏮</div>
