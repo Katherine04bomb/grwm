@@ -320,10 +320,10 @@ footer{border-top:1px solid var(--border);padding:28px 32px;display:flex;align-i
   </div>
   <nav>
     <button class="nav-link" onclick="scrollToSection('ready-section')">Get Ready with Me</button>
-    <button class="nav-link" onclick="scrollToSection('cities-section')">Cities</button>
-    <button class="nav-link" onclick="scrollToSection('community-section')">Community</button>
+    <button class="nav-link" onclick="scrollToSection('cities-section')">Where to Go</button>
+    <button class="nav-link" onclick="scrollToSection('community-section')">What Should I Know</button>
     <button class="nav-link nav-cta" onclick="openModal('planning-modal')">
-      <span class="soon-tag">SOON</span>Start Planning
+      <span class="soon-tag">SOON</span>AI Itinerary
     </button>
   </nav>
 </header>
@@ -377,8 +377,8 @@ footer{border-top:1px solid var(--border);padding:28px 32px;display:flex;align-i
   <div class="hero-story">
     <div class="story-quote">"China sounds amazing — but where do I even start?" I've heard this from every single foreign friend before their first visit. So I built this."</div>
     <div class="story-examples">
-      <div class="story-ex"><div class="story-ex-icon">📶</div><div>My Australian friend landed in Shanghai and spent 2 hours at the airport trying to get wifi — his phone had no signal and he couldn't contact the hotel.</div></div>
-      <div class="story-ex"><div class="story-ex-icon">💳</div><div>Another friend couldn't pay for dinner. She assumed credit cards worked everywhere — but China runs on WeChat Pay and Alipay face-scan payments.</div></div>
+      <div class="story-ex"><div class="story-ex-icon">📶</div><div>My Australian friend Michael landed in Shanghai and spent 2 hours at the airport trying to get wifi — his phone had no signal and he couldn't contact the hotel.</div></div>
+      <div class="story-ex"><div class="story-ex-icon">💳</div><div>Another friend Kory couldn't pay for dinner. She assumed credit cards worked everywhere — but China runs on WeChat Pay and Alipay face-scan payments.</div></div>
     </div>
   </div>
 </section>
@@ -455,7 +455,7 @@ footer{border-top:1px solid var(--border);padding:28px 32px;display:flex;align-i
       <div style="flex:1">
         <div class="step-num-label">Step 6</div>
         <div class="step-title-main">🌐 Firewall & VPN</div>
-        <div class="step-desc-main">Google, Instagram, WhatsApp are blocked in China. Download a VPN before you fly. I'll tell you which ones actually work.</div>
+        <div class="step-desc-main">Google, Instagram, WhatsApp and ChatGPT are blocked in China. Download a VPN before you fly. I'll tell you which ones actually work.</div>
       </div>
       <div class="step-action"><button class="step-btn" onclick="openModal('network-modal')">Learn more →</button></div>
     </div>
@@ -465,7 +465,7 @@ footer{border-top:1px solid var(--border);padding:28px 32px;display:flex;align-i
       <div style="flex:1">
         <div class="step-num-label">Step 7</div>
         <div class="step-title-main">📱 Download Your Apps</div>
-        <div class="step-desc-main">WeChat, Alipay, Didi, Amap, Dianping, Trip.com. These 6 apps will run your entire trip. Set them up now — some require verification that's easier outside China.</div>
+        <div class="step-desc-main">For payment, communication, transportation, translation, food recommendation... These apps will run your entire trip. Set them up now — some require verification that's easier outside China.</div>
       </div>
       <div class="step-action"><button class="step-btn" onclick="openModal('apps-modal')">App list →</button></div>
     </div>
@@ -495,8 +495,9 @@ footer{border-top:1px solid var(--border);padding:28px 32px;display:flex;align-i
       <div style="flex:1">
         <div class="step-num-label">Step 10</div>
         <div class="step-title-main">🛃 Arrival & Immigration</div>
-        <div class="step-desc-main">What to expect at Chinese immigration, health declaration forms, baggage rules, and how to get from the airport to your hotel smoothly.</div>
+        <div class="step-desc-main">You can fill in the Arrival Card online within 3 days before landing. Know what to expect at immigration and how to get from airport to hotel smoothly.</div>
       </div>
+      <div class="step-action"><button class="step-btn" onclick="openModal('customs-modal')">What to expect →</button></div>
     </div>
 
   </div>
@@ -707,13 +708,13 @@ footer{border-top:1px solid var(--border);padding:28px 32px;display:flex;align-i
       <button class="modal-close" onclick="closeModal('sim-modal')">×</button>
     </div>
     <div class="modal-body">
-      <div class="modal-note" style="margin-bottom:16px"><strong>⚠️ Important:</strong> There are four options to use data in China. Expect using your international roaming, you also can...</div>
+      <div class="modal-note" style="margin-bottom:16px"><strong>⚠️ Important:</strong> Many hotels require a local Chinese phone number for check-in and booking confirmations. Getting a SIM or eSIM is highly recommended than using international roam.</div>
       <div class="info-grid">
-        <div class="info-card"><div class="info-card-title">📲 eSIM (Best Option)</div><ul class="info-list"><li>Buy on Airalo, Holafly, or China Unicom International before flying</li><li>Activates the moment you land — no waiting at airport</li><li>Works on any eSIM-compatible phone</li><li>Best option if you want zero stress on arrival</li></ul></div>
-        <div class="info-card"><div class="info-card-title">🛬 Airport SIM</div><ul class="info-list"><li>China Mobile and China Unicom counters at all major airports</li><li>Bring your passport — registration is required by law</li><li>Tourist SIMs: 30–90 days, usually unlimited data</li><li>Costs roughly ¥100–200 (about $14–28)</li></ul></div>
-        <div class="info-card"><div class="info-card-title">📡 Pocket WiFi</div><ul class="info-list"><li>Rent at the airport or pre-book online</li><li>Great for sharing data with travel companions</li><li>Return at end of trip — refundable deposit</li><li>Good backup if SIM doesn't work for your phone</li></ul></div>
+        <div class="info-card"><div class="info-card-title">📲 eSIM</div><ul class="info-list"><li>Best for:	Stay 5–15 days. Need chat, maps, social media. Don't need a Chinese number. Want to skip airport queues & set up before flying.</li><li>Where to buy: Online - Nomad, Airalo, Holafly, Trip.com, China Unicom International — buy before flying and consult with customer service representative</li><li>How to set up :	Buy online → scan QR code → activate → works the moment you land ✅</li><li>Cost：	（example） Nomad 30-day plan — 10GB for ~¥100 Chinese Yuan ($13 USD)</li><li>⚠️ Note:	Make sure your phone is a eSIM-compatible phone - dial *#06# on your phone. If it shows EID → eSIM compatible ✅</li></ul></div>
+        <div class="info-card"><div class="info-card-title">💳 Physical SIM Card</div><ul class="info-list"><li>Best for: Stay 2+ weeks. Need a real China number for app registration, bank codes, hotel check-in. Making local calls/texts.</li><li>Where to buy: go to the China Mobile / China Unicom / China Telecom counters at all major airports, or carrier shops in the city</li><li>How to set up: Bring passport (required by law) → choose plan at counter</li><li>Costs: (example) 30-day plan — 80GB data + 300 mins calls for ~¥250 ($35 USD). Airport counters slightly pricier than city shops!</li><li>⚠️ Note: Passport is required to register a Chinese SIM card.</li></ul></div>
+        <div class="info-card"><div class="info-card-title">📡 Pocket WiFi</div><ul class="info-list"><li>Best for: Backup if SIM doesn't work for your phone or you simply want to share data with companions.</li><li>Where to buy: Rent at airport counter or pre-book online (and pick at airport)</li><li>How to set up: Pick up at airport. Return at end of trip — may need refundable deposit.</li><li>Cost: ~$4 USD per day</li><li>⚠️ Note: Best when you always stay with companions. Not ideal for solo travelers.</li></ul></div>
       </div>
-      <div class="modal-note" style="margin-top:14px">💡 <strong>Kat's tip:</strong> Get an eSIM online before you fly.</div>
+      <div class="modal-note" style="margin-top:14px">💡 <strong>Kat's tip:</strong>  eSIM on Nomad or Airalo for trips under 2 weeks. If you're staying longer or need a local number for apps, get a China Mobile SIM — best nationwide coverage.</div>
     </div>
   </div>
 </div>
@@ -728,9 +729,9 @@ footer{border-top:1px solid var(--border);padding:28px 32px;display:flex;align-i
     <div class="modal-body">
       <div class="modal-note" style="margin-bottom:16px"><strong>The reality:</strong> Even tiny street food stalls only accept QR code payments. No Alipay or WeChat Pay = real trouble. My friend literally couldn't pay for his meal. Set this up at home.</div>
       <div class="app-list">
-        <div class="app-item"><div class="app-icon-box">💳</div><div><div class="app-name">Alipay 支付宝 — Priority #1</div><div class="app-desc">Now officially supports foreign Visa/Mastercard/Amex directly. Download, register with your phone number, link your card, done. Used at literally everything — restaurants, taxis, markets, convenience stores.</div><div class="app-tip">✅ Foreigners: use the "International" version. Link your card in Settings → Bank Cards.</div></div></div>
-        <div class="app-item"><div class="app-icon-box">💬</div><div><div class="app-name">WeChat Pay 微信支付</div><div class="app-desc">Built into WeChat. Also supports foreign cards now but the setup is slightly more complex. Worth setting up as a backup.</div><div class="app-tip">✅ You'll need WeChat anyway — set up the payment while you're at it.</div></div></div>
-        <div class="app-item"><div class="app-icon-box">💵</div><div><div class="app-name">Cash (Backup)</div><div class="app-desc">Bring ¥500–1000 RMB as emergency backup. Some older vendors, temples, and rural areas still prefer cash. Exchange at Bank of China — best rates.</div><div class="app-tip">⚠️ Notify your home bank before travel to prevent card blocks at ATMs.</div></div></div>
+        <div class="app-item"><div class="app-icon-box">💳</div><div><div class="app-name">Alipay 支付宝 — Priority #1</div><div class="app-desc">Now officially supports foreign Visa/Mastercard/Amex directly. Download, register, link your card. Used everywhere — restaurants, taxis, markets, convenience stores.</div><div class="app-tip">✅ Use the International version. Settings → Bank Cards. Do this BEFORE arriving.</div></div></div>
+        <div class="app-item"><div class="app-icon-box">💬</div><div><div class="app-name">WeChat Pay 微信支付</div><div class="app-desc">Built into WeChat. Also supports foreign cards. Set it up as backup while setting up WeChat anyway.</div><div class="app-tip">✅ There are so many mini programs in WeChat </div></div></div>
+        <div class="app-item"><div class="app-icon-box">💵</div><div><div class="app-name">Cash (Backup)</div><div class="app-desc">Bring ¥500–1000 RMB as emergency backup. Some older vendors, temples, and rural areas still prefer cash. Exchange at Bank of China for best rates.</div><div class="app-tip">⚠️ Notify your home bank before travel to prevent card blocks at ATMs (ATMs with UnionPay/Visa logos work for foreign cards.).</div></div></div>
       </div>
     </div>
   </div>
@@ -740,15 +741,15 @@ footer{border-top:1px solid var(--border);padding:28px 32px;display:flex;align-i
 <div class="modal-overlay" id="network-modal">
   <div class="modal-box">
     <div class="modal-header">
-      <div><div class="modal-title">🌐 Firewall & VPN · 网络</div><div class="modal-subtitle">The Great Firewall — what's blocked and how to stay connected</div></div>
+      <div><div class="modal-title">🌐 Firewall & VPN · 网络</div><div class="modal-subtitle">What's blocked in China and how to stay connected</div></div>
       <button class="modal-close" onclick="closeModal('network-modal')">×</button>
     </div>
     <div class="modal-body">
-      <div class="modal-note" style="margin-bottom:16px"><strong>Why are apps blocked?</strong> China operates a national internet filter called the "Great Firewall." It's not a glitch — it's government policy. Google, Instagram, WhatsApp, Facebook, YouTube, and most Western news sites are blocked.</div>
+      <div class="modal-note" style="margin-bottom:16px"><strong>Why are apps blocked?</strong> China operates the "Great Firewall" — a national internet filter. Google, Instagram, WhatsApp, Facebook, YouTube are blocked by government policy. It's government policy.</div>
       <div class="app-list">
         <div class="app-item"><div class="app-icon-box">🚫</div><div><div class="app-name">What doesn't work in China</div><div class="app-desc">Google (Search, Maps, Gmail, YouTube), Instagram, Facebook, WhatsApp, Twitter/X, Snapchat, most news websites, Spotify, Netflix, and many Western services.</div><div class="app-tip">⚠️ Even some hotel WiFis are filtered.</div></div></div>
         <div class="app-item"><div class="app-icon-box">🔐</div><div><div class="app-name">VPN — The Golden Rule</div><div class="app-desc">Download and TEST your VPN BEFORE flying. Once in China, the App Store and Play Store are filtered and you cannot easily download VPN apps. This is the #1 mistake first-timers make.</div><div class="app-tip"> Free VPNs almost never work.</div></div></div>
-        <div class="app-item"><div class="app-icon-box">✅</div><div><div class="app-name">What you can use instead</div><div class="app-desc">WeChat (messaging), Amap (maps & navigation), Dianping (restaurant reviews — China's Yelp).</div><div class="app-tip">✅ All Chinese apps work perfectly without VPN.</div></div></div>
+        <div class="app-item"><div class="app-icon-box">✅</div><div><div class="app-name">What you can use instead</div><div class="app-desc">Amap/Gaode (Google Maps) · Dianping (Yelp/TripAdvisor) · Bilibili (YouTube) · Baidu (Google) · WeChat (WhatsApp + everything)</div><div class="app-tip">✅ All Chinese apps work perfectly without any VPN.</div></div></div>
       </div>
       <div class="modal-note" style="margin-top:14px">⚖️ <strong>Legal note:</strong> VPN use by tourists is a gray area. Millions of tourists use them every year without issue. Use for personal access only.</div>
     </div>
@@ -764,13 +765,13 @@ footer{border-top:1px solid var(--border);padding:28px 32px;display:flex;align-i
     </div>
     <div class="modal-body">
       <div class="app-list">
-        <div class="app-item"><div class="app-icon-box">💬</div><div><div class="app-name">WeChat 微信 — Everything App</div><div class="app-desc">Messaging, payments, mini-programs, food ordering, maps. Without WeChat, China is very hard. Set it up before arrival and link a payment method.</div><div class="app-tip">✅ Register with your phone number. Add your Chinese friends so they can show you around.</div></div></div>
+        <div class="app-item"><div class="app-icon-box">💬</div><div><div class="app-name">WeChat 微信 — Everything App</div><div class="app-desc">Messaging, payments, mini-programs, food ordering, maps. Without WeChat, China is very hard. Set it up before arrival and link a payment method.</div><div class="app-tip">✅ Register with your phone number (non-Chinese numbers work!). Add your Chinese friends so they can show you around.</div></div></div>
         <div class="app-item"><div class="app-icon-box">💳</div><div><div class="app-name">Alipay 支付宝 — Pay for Everything</div><div class="app-desc">China's dominant payment platform. Foreign cards now accepted. Street food, taxis, supermarkets — all QR code.</div><div class="app-tip">✅ Link your Visa/Mastercard in Settings. Do this BEFORE you arrive.</div> <!-- ✏️ <a href="https://youtube.com/YOUR_VIDEO_ID" target="_blank" class="yt-link">▶ Watch: How to set up Alipay as a foreigner</a> --> </div></div>
-        <div class="app-item"><div class="app-icon-box">🚗</div><div><div class="app-name">Didi 滴滴 — China's Uber</div><div class="app-desc">Works in English. No language barrier. Much cheaper than taxis. The driver comes to you — no hailing required.</div><div class="app-tip">✅ Set your pickup and destination in English, the app handles the translation.</div> <!-- ✏️ When you have a YouTube tutorial ready, replace the comment below with:
+        <div class="app-item"><div class="app-icon-box">🚗</div><div><div class="app-name">Didi 滴滴 — China's Uber</div><div class="app-desc">Works in English. No language barrier. Much cheaper than taxis. Book in the app/mini program, the driver comes to you — no hailing required.</div><div class="app-tip">✅ Set your pickup and destination in English, the app handles the translation.</div><div class="app-tip">🔑 Kat's hack: send driver a <strong>photo</strong> of your location and copy paste the message "我是外国人，不会讲中文" (I'm a foreigner, I can't speak Mandarin-so that they wont call you) </div> <!-- ✏️ When you have a YouTube tutorial ready, replace the comment below with:
       <a href="https://youtube.com/YOUR_VIDEO_ID" target="_blank" class="yt-link">▶ Watch Kat's Didi tutorial</a> --></div></div>
         <div class="app-item"><div class="app-icon-box">🗺️</div><div><div class="app-name">Amap 高德地图 — Navigation</div><div class="app-desc">Google Maps doesn't work well in China. Amap (Gaode) is the most accurate map, it has an English mode and works offline. </div><div class="app-tip">✅ Switch to English in Settings. Download your city maps offline before exploring.</div></div></div>
         <div class="app-item"><div class="app-icon-box">🍜</div><div><div class="app-name">大众点评 Dianping — Where to Eat</div><div class="app-desc">China's version of Yelp + TripAdvisor. Every restaurant, café, and attraction rated and reviewed. Filter by "foreigner-friendly" or "English menu".</div><div class="app-tip">✅ Use it to find the best local spots tourists never discover.</div></div></div>
-        <div class="app-item"><div class="app-icon-box">🚆</div><div><div class="app-name">Trip.com (携程) — Book Everything</div><div class="app-desc">Trains, flights, hotels all in one English-language app. Much easier than the official 12306 rail app for foreigners. Supports foreign payment cards.</div><div class="app-tip">✅ Book high-speed rail here — it's the most reliable way as a foreigner.</div></div></div>
+        <div class="app-item"><div class="app-icon-box">🚆</div><div><div class="app-name">Trip.com (携程) — Book Everything</div><div class="app-desc">Trains, flights, hotels all in one English-language app. Supports foreign payment cards.</div><div class="app-tip">✅ Book high-speed rail here — it's the most reliable way as a foreigner.</div></div></div>
       </div>
       <div class="modal-note" style="margin-top:14px">🔤 <strong>For translation:</strong> Google Translate (with offline Chinese downloaded) works well for text and camera translation. Baidu Translate is a solid local alternative- it understands Chinese perfectly. Use Papago for photo translation (menu, signs).</div>
     </div>
@@ -786,9 +787,9 @@ footer{border-top:1px solid var(--border);padding:28px 32px;display:flex;align-i
     </div>
     <div class="modal-body">
       <div class="info-grid">
-        <div class="info-card"><div class="info-card-title">🚄 High-Speed Rail</div><ul class="info-list"><li>World's best rail system — use it between cities!</li><li>Beijing → Shanghai: 4.5 hours (vs 1.5hr flight + 3hr airport process)</li><li>Book on Trip.com or 12306 app with your passport number</li><li>G trains = fastest, D trains = fast, C = city rail</li><li>Bring your passport to collect tickets at the station</li></ul></div>
-        <div class="info-card"><div class="info-card-title">🚇 Metro</div><ul class="info-list"><li>Every major city has modern, cheap metro</li><li>Machines have English — easy to use</li><li>Or scan QR code in WeChat/Alipay at gates</li><li>¥3–10 per journey — extremely affordable</li><li>Covers all tourist spots in major cities</li></ul></div>
-        <div class="info-card"><div class="info-card-title">🚗 Didi (Taxi App)</div><ul class="info-list"><li>Like Uber — book in the app, no language needed</li><li>Show the destination text to driver if unsure</li><li>Very affordable: ¥20–40 for most city rides</li><li>Also: 曹操出行, 花小猪 (cheaper Didi alternatives)</li><li>Never use unlicensed taxis at airports!</li></ul></div>
+        <div class="info-card"><div class="info-card-title">🚄 High-Speed Rail</div><ul class="info-list"><li>World's best rail system — try it between cities!</li><li>Beijing → Shanghai: 4.5 hours (vs 1.5hr flight + 3hr airport process)</li><li>Book on Trip.com or 12306 app with your passport number</li><li>G trains = fastest, D trains = fast, C = city rail</li><li>Bring your passport to collect tickets at the station</li></ul></div>
+        <div class="info-card"><div class="info-card-title">🚇 Metro</div><ul class="info-list"><li>Every major city has modern, cheap metro</li><li>Machines probably have English — easy to use; or directly ask staff from information center/customer service for help</li><li>Or scan QR code in WeChat/Alipay at gates</li><li>¥3–15 per journey — extremely affordable</li><li>Covers all tourist spots in major cities</li></ul></div>
+        <div class="info-card"><div class="info-card-title">🚗 Didi (Taxi App)</div><ul class="info-list"><li>Like Uber — book in the app, no language needed</li><li>Show the destination text to driver if unsure</li><li>Very affordable: ¥20–40 for most city rides</li><li>Also: 曹操出行, 花小猪 (cheaper Didi alternatives)</li><li>Never use unlicensed taxis at airports!</li><li><strong>Screenshot your hotel name in mandarin and show to your driver to avoid going to a wrong place</strong></li><li></li> </div>
         <div class="info-card"><div class="info-card-title">✈️ Domestic Flights</div><ul class="info-list"><li>Best for very long distances (Beijing → Yunnan)</li><li>Book on Trip.com — English support</li><li>Arrive 2 hours early — security is thorough</li><li>Budget airlines: Xiamen Air, Shenzhen Airlines</li></ul></div>
       </div>
     </div>
@@ -811,6 +812,21 @@ footer{border-top:1px solid var(--border);padding:28px 32px;display:flex;align-i
     <div class="modal-note" style="margin-top:14px">🏥 <strong>International hospitals</strong> with English-speaking staff exist in Beijing, Shanghai, Chengdu and major cities. Kat strongly recommends purchasing travel insurance that covers medical evacuation.</div>
   </div></div>
 </div>
+
+<!-- CUSTOMS -->
+<div class="modal-overlay" id="customs-modal">
+  <div class="modal-box"><div class="modal-header"><div><div class="modal-title">🛃 Arrival Card &amp; Immigration · 入关</div><div class="modal-subtitle">What to expect when you land in China</div></div><button class="modal-close" onclick="closeModal('customs-modal')">×</button></div>
+  <div class="modal-body">
+    <div class="modal-note" style="margin-bottom:16px">📝 <strong>Arrival Card tip:</strong> You can fill in the arrival card online <strong>within 3 days before landing</strong> in China — saves time at immigration. Search "中国入境卡网上填报" or check with your airline at check-in.</div>
+    <div class="info-grid">
+      <div class="info-card"><div class="info-card-title">✈️ On the Plane</div><ul class="info-list"><li>Fill in Arrival Card — given on plane or do online in advance</li><li>Have your hotel address (in Chinese if possible) &amp;phone number ready </li><li>Have your return/onward ticket accessible</li><li>Could have ¥500 RMB cash as backup </li></ul></div>
+      <div class="info-card"><div class="info-card-title">🛂 At Immigration</div><ul class="info-list"><li>Join "Foreigners" queue (外国人通道)</li><li>Fingerprints and photo taken — routine, stay calm</li><li>Show: passport, arrival card, hotel booking and maybe flight tickets</li><li>If asked purpose: "Tourism" (旅游 lǚ yóu), "Business Trip" (出差 chu chai)... </li></ul></div>
+      <div class="info-card"><div class="info-card-title">🧳 Customs</div><ul class="info-list"><li>Use green "Nothing to Declare" channel if you have nothing to declare</li><li>Limit: ¥5000 RMB cash without declaration</li><li>No fresh fruit, meat, or dairy from abroad</li><li>Personal electronics are fine (your power bank/portable charger must carry CCC mark, otherwise it will be confiscated) </li></ul></div>
+      <div class="info-card"><div class="info-card-title">🚕 Leaving the Airport</div><ul class="info-list"><li>Use Didi from arrivals — much cheaper than airport taxis</li><li>Metro available at most major airports</li><li>Airport Express train/bus in some places</li><li>Having hotel address in Chinese on your phone is highly recommended!</li></ul></div>
+    </div>
+  </div></div>
+</div>
+
 <div id="about-container"></div>
 
 
