@@ -283,7 +283,7 @@ footer{border-top:1px solid var(--border);padding:28px 32px;display:flex;align-i
 
 <!-- HEADER -->
 <header>
-  <div class="logo-area">
+  <div class="logo-area" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="cursor:pointer" title="Back to top">
     <div class="logo-travelers">
       <div class="traveler">
         <svg width="20" height="32" viewBox="0 0 20 32" fill="none">
@@ -941,12 +941,7 @@ function filterCountries(){
 }
 
 // ── NOTIFY ──
-function communityNotify(){
-  const e=document.getElementById('comm-email').value;
-  if(!e||!e.includes('@')){alert('Please enter a valid email.');return}
-  document.getElementById('comm-success').style.display='block';
-  document.getElementById('comm-email').value=''
-}
+
 function plannerNotify(){
   const e=document.getElementById('plan-email').value;
   if(!e||!e.includes('@')){alert('Please enter a valid email.');return}
